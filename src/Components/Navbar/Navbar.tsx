@@ -47,16 +47,25 @@ export default function Navbar() {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal text-gray-700 px-1 gap-2 text-[16px]">
           <li>
-            <a className=" hover:text-primary" href="/">Home</a>
+            <a className=" hover:text-primary" href="/">
+              Home
+            </a>
           </li>
           <li>
-            <a className=" hover:text-primary" href="/meeting-rooms">Meeting Rooms</a>
+            <a className=" hover:text-primary" href="/meeting-rooms">
+              Meeting Rooms
+            </a>
           </li>
           <li>
-            <a className=" hover:text-primary" href="/about">About Us</a>
+            <a className=" hover:text-primary" href="/about">
+              About Us
+            </a>
           </li>
           <li>
-            <a className=" hover:text-primary" href="/contact"> Contact Us</a>
+            <a className=" hover:text-primary" href="/contact">
+              {" "}
+              Contact Us
+            </a>
           </li>
         </ul>
       </div>

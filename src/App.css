@@ -7,16 +7,19 @@ body {
   scroll-behavior: smooth;
 }
 ::-webkit-scrollbar {
-    width: 12px;            
-    height: 12px;             
+  width: 12px;
+  height: 12px;
 }
 html {
-    scrollbar-width: thin;        
+  scrollbar-width: thin;
 }
 body::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+  width: 12px;
+  height: 12px;
 }
-.swiper-pagination-bullet-active{
-background:  #7ec242 !important;
+.swiper-pagination-bullet-active {
+  background: #7ec242 !important;
+}
+.scroll-to-top {
+  bottom: 80px !important;
 }
