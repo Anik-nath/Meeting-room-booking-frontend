@@ -6,7 +6,7 @@ export default function HowItWorks() {
       <div id="HowItWorks" className="relative py-10 sm:py-16 lg:py-24">
         <div className="md:px-6 px-6 mx-auto">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-4xl text-primary font-extrabold mx-auto md:text-6xl lg:text-5xl">
+            <h2 className="text-4xl text-primary font-bold mx-auto md:text-6xl lg:text-5xl">
               How does it work?
             </h2>
             <p className="max-w-2xl mx-auto mt-4 text-base text-gray-400 leading-relaxed md:text-2xl">
