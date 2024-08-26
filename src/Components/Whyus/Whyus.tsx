@@ -6,13 +6,13 @@ export default function Whyus() {
       <div className="w-full flex justify-center items-center flex-col">
         <img
           className="w-full rounded-2xl"
-          src="https://i.postimg.cc/X7R0sKym/photo-1557426272-fc759fdf7a8d.jpg"
+          src="https://i.postimg.cc/tTBJmyfr/real-time-availabillity-image.webp"
           alt=""
         />
       </div>
       <div className="w-full flex flex-col justify-center text-secondary">
         <h1 className="text-5xl font-bold py-4 text-white">Why choose us?</h1>
-        <p className="text-lg text-white">
+        <p className="text-lg text-gray-100">
           Discover the Ultimate Solution for Effortless Meeting Room
           Reservations And Featuring some advantages like -{" "}
         </p>

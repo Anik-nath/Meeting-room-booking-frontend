@@ -9,7 +9,7 @@ export default function HowItWorks() {
             <h2 className="text-4xl text-primary font-bold mx-auto md:text-6xl lg:text-5xl">
               How does it work?
             </h2>
-            <p className="max-w-2xl mx-auto mt-4 text-base text-gray-400 leading-relaxed md:text-2xl">
+            <p className="max-w-2xl mx-auto mt-4 text-base text-gray-500 leading-relaxed md:text-2xl">
               Our Online solution will help you from start to finish
             </p>
           </div>
@@ -35,7 +35,7 @@ export default function HowItWorks() {
                   <CalendarHeart className="h-12 w-full text-2xl text-primary"/>
                 </span>
                 </div>
-                <p className="mt-10 text-base text-gray-500 fonsem md:text-lg">
+                <p className="mt-10 font-semibold text-gray-500 fonsem md:text-lg">
                 Select a Room
                 </p>
               </div>
@@ -48,7 +48,7 @@ export default function HowItWorks() {
                   <CalendarClock  className="h-12 w-full text-2xl text-primary" />
                 </span>
                 </div>
-                <p className="mt-10 text-base text-gray-500 fonsem md:text-lg">
+                <p className="mt-10 font-semibold text-gray-500 fonsem md:text-lg">
                 Choose Date & Time
                 </p>
               </div>
@@ -61,7 +61,7 @@ export default function HowItWorks() {
                   <CalendarCheck className="h-12 w-full text-2xl text-primary" />
                 </span>
                 </div>
-                <p className="mt-10 text-base text-gray-500 fonsem md:text-lg">
+                <p className="mt-10 font-semibold text-gray-500 fonsem md:text-lg">
                   Confirm Booking
                 </p>
               </div>
