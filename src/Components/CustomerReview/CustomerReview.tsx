@@ -12,7 +12,7 @@ export default function CustomerReview() {
     <div className="bg-primary md:px-10 px-6 py-10 sm:py-16 lg:py-24 grid md:grid-cols-3 grid-cols-1 md:gap-4 gap-8">
       <div className="w-full h-full flex flex-col justify-center">
         <h1 className="text-5xl font-bold py-4 text-white">What People Say</h1>
-        <p className=" text-gray-100 mb-4">
+        <p className=" text-gray-100 mb-4 md:text-lg text-md">
           Join countless satisfied users who have transformed their meeting
           experiences with our intuitive platform.
         </p>

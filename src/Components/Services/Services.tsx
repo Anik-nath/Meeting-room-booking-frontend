@@ -7,7 +7,7 @@ export default function Services() {
         <h1 className="text-4xl text-primary font-bold md:text-6xl">
           Our solutions
         </h1>
-        <p className="text-gray-500 text-lg mt-4">Comprehensive Services to Meet Your Every Need.</p>
+        <p className="text-gray-500 text-2xl mt-4">Comprehensive Services to Meet Your Every Need.</p>
       </div>
       <div className="grid md:grid-cols-4 grid-cols-2 gap-4">
         <div

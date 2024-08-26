@@ -3,25 +3,25 @@ import { Home, MailIcon, Phone } from "lucide-react";
 export default function Footer() {
   return (
     <>
-      <footer className="footer bg-base-200 text-base-content md:p-10 lg:p-10 p-6">
+      <footer className="footer bg-base-200 text-base-content md:py-14 md:p-10 p-6">
         <nav>
-          <h6 className="footer-title">Contact Information</h6>
-         <p className="flex flex-row gap-1 items-center"><span><MailIcon className="text-gray-500 w-5 h-5"></MailIcon></span> Email: nexusmeet@gmail.com</p>
-         <p className="flex flex-row gap-1 items-center"><span><Phone className="text-gray-500 w-5 h-5"></Phone></span> Phone: 01333387694</p>
-         <p className="flex flex-row gap-1 items-center"><span><Home className="text-gray-500 w-5 h-5"></Home></span> Office: WT 275 Road, ABCD Tower, Chittagong, Bangladesh</p>
+          <h6 className="footer-title text-primary opacity-100">Contact Information</h6>
+         <p className="flex flex-row gap-1 items-center py-2"><span><MailIcon className="text-primary w-5 h-5"></MailIcon></span> Email: nexusmeet@gmail.com</p>
+         <p className="flex flex-row gap-1 items-center"><span><Phone className="text-primary w-5 h-5"></Phone></span> Phone: 01333387694</p>
+         <p className="flex flex-row gap-1 items-center py-2"><span><Home className="text-primary w-5 h-5"></Home></span> Office: WT 275 Road, ABCD Tower, Chittagong, Bangladesh</p>
         </nav>
         <nav>
-          <h6 className="footer-title">Company</h6>
-          <a className="link link-hover">About us</a>
-          <a className="link link-hover">Contact</a>
-          <a className="link link-hover">Jobs</a>
+          <h6 className="footer-title text-primary opacity-100">Company</h6>
+          <a className="link link-hover py-2">About us</a>
+          <a className="link link-hover ">Contact</a>
+          <a className="link link-hover py-2">Jobs</a>
           <a className="link link-hover">Press kit</a>
         </nav>
         <nav>
-          <h6 className="footer-title">Legal</h6>
-          <a className="link link-hover">Terms of use</a>
+          <h6 className="footer-title text-primary opacity-100">Legal</h6>
+          <a className="link link-hover py-2">Terms of use</a>
           <a className="link link-hover">Privacy policy</a>
-          <a className="link link-hover">Cookie policy</a>
+          <a className="link link-hover py-2">Cookie policy</a>
         </nav>
       </footer>
       <footer className="footer flex justify-between bg-base-200 text-base-content border-t border-primary px-6 md:px-10 py-4">
