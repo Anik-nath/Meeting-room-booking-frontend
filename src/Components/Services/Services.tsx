@@ -2,7 +2,7 @@ import { Clock, HandHeart, Merge, Rocket } from "lucide-react";
 
 export default function Services() {
   return (
-    <div className="md:px-10 px-6 mx-auto py-10 md:py-16">
+    <div className="md:px-10 px-6 mx-auto py-10 md:py-24">
       <div className="text-center pb-16">
         <h1 className="text-4xl text-primary font-bold md:text-6xl">
           Our solutions
