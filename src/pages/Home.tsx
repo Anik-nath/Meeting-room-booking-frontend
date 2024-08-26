@@ -1,4 +1,5 @@
 import CustomerReview from "../Components/CustomerReview/CustomerReview";
+import FeaturedRoom from "../Components/FeaturedRoom/FeaturedRoom";
 import Hero from "../Components/Hero/Hero";
 import HowItWorks from "../Components/HowItWorks/HowItWorks";
 import Services from "../Components/Services/Services";
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero></Hero>
       <Services></Services>
       <Whyus></Whyus>
+      <FeaturedRoom></FeaturedRoom>
       <HowItWorks></HowItWorks>
       <CustomerReview></CustomerReview>
     </div>

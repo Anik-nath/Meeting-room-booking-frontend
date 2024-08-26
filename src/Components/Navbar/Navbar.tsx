@@ -1,6 +1,6 @@
 export default function Navbar() {
   return (
-    <div className="navbar border-b bg-secondary text-primary-content md:px-10 lg:px-10">
+    <div className="navbar bg-secondary text-primary-content md:px-10 lg:px-10">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -45,18 +45,18 @@ export default function Navbar() {
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-2 text-[16px]">
+        <ul className="menu menu-horizontal text-gray-700 px-1 gap-2 text-[16px]">
           <li>
-            <a href="/">Home</a>
+            <a className=" hover:text-primary" href="/">Home</a>
           </li>
           <li>
-            <a href="/meeting-rooms">Meeting Rooms</a>
+            <a className=" hover:text-primary" href="/meeting-rooms">Meeting Rooms</a>
           </li>
           <li>
-            <a href="/about">About Us</a>
+            <a className=" hover:text-primary" href="/about">About Us</a>
           </li>
           <li>
-            <a href="/contact"> Contact Us</a>
+            <a className=" hover:text-primary" href="/contact"> Contact Us</a>
           </li>
         </ul>
       </div>
