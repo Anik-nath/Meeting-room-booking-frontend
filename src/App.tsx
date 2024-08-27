@@ -5,6 +5,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import ScrollToTop from "react-scroll-to-top";
 import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/about-us" element={<AboutUs />}></Route>
+        <Route path="/contact-us" element={<ContactUs />}></Route>
       </Routes>
       <ScrollToTop viewBox="0 0 160 256" smooth color="#7ec242" />
       <Footer></Footer>

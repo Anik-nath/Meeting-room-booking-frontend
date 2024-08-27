@@ -211,13 +211,6 @@ export default function AboutUs() {
           </ul>
         </div>
       </section>
-      {/* <section id="greatings" className="team text-center md:px-10 px-6 py-8">
-        <p>
-          Thank you for visiting our About Us page. We’re excited to continue
-          growing and evolving, and we look forward to helping you find the
-          perfect space for your next meeting.
-        </p>
-      </section> */}
     </div>
   );
 }
