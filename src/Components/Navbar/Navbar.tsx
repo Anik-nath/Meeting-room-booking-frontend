@@ -70,7 +70,7 @@ export default function Navbar() {
         </ul>
       </div>
       <div className="navbar-end flex flex-row items-center gap-4">
-        <a className="btn-primary text-white">login</a>
+        <a href="/signin" className="btn-primary text-white">Sign in</a>
         <div id="theme-controller">
           <label className="swap swap-rotate">
             <input type="checkbox" className="theme-controller" value="black" />

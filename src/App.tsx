@@ -7,7 +7,8 @@ import ScrollToTop from "react-scroll-to-top";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import ErrorPage from "./pages/ErrorPage";
-
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/about-us" element={<AboutUs />}></Route>
         <Route path="/contact-us" element={<ContactUs />}></Route>
+        <Route path="/signin" element={<SignIn />}></Route>
+        <Route path="/signup" element={<SignUp />}></Route>
         <Route path="*" element={<ErrorPage />}></Route>
       </Routes>
       <ScrollToTop viewBox="0 0 160 256" smooth color="#7ec242" />

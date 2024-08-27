@@ -87,7 +87,7 @@ export default function AboutUs() {
       <section
         id="mission"
         ref={missionRef}
-        className="mission text-center md:px-10 px-6 py-12"
+        className="text-center md:px-10 px-6 py-12"
       >
         <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-10 text-center">
           Our Mission
