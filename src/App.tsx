@@ -9,6 +9,7 @@ import ContactUs from "./pages/ContactUs";
 import ErrorPage from "./pages/ErrorPage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import MeetingRooms from "./pages/MeetingRooms";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/about-us" element={<AboutUs />}></Route>
         <Route path="/contact-us" element={<ContactUs />}></Route>
+        <Route path="/meeting-rooms" element={<MeetingRooms />}></Route>
         <Route path="/signin" element={<SignIn />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="*" element={<ErrorPage />}></Route>
