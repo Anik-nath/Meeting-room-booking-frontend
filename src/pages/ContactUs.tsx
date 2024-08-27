@@ -40,6 +40,7 @@ export default function ContactUs() {
         <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-10 text-center">
           Let's start conversation
         </h2>
+        {/* contact form*/}
         <div ref={formRef}>
           <form className="bg-gray-100 shadow-md rounded-2xl p-4 md:w-1/2 mx-auto">
             {/* name */}
