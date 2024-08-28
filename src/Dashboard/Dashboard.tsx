@@ -1,5 +1,5 @@
 import {
-  ArrowDownRightFromSquare,
+  ArrowLeft,
   Blocks,
   CalendarCheck,
   CircleX,
@@ -7,10 +7,12 @@ import {
   LayoutList,
   List,
   ListCollapse,
+  LogOut,
   Logs,
   SquarePen,
 } from "lucide-react";
 import { useState } from "react";
+import icon from "../assets/icon.png";
 import { Outlet, useLocation } from "react-router-dom";
 
 type TMenu = "menu1" | "menu2" | "menu3" | null;
@@ -49,7 +51,7 @@ const Dashboard: React.FC = () => {
         <div className="flex flex-col flex-1 overflow-y-auto bg-gray-100">
           {/* <!-- Mobile view logo --> */}
           <div className="flex items-center justify-between p-4 md:hidden">
-            <img className="md:w-8 lg:w-8 w-6" src="./icon.png" alt="" />
+            <img className="md:w-8 lg:w-8 w-6" src={icon} alt="" />
             <span className="text-[#7ec242] font-bold lg:text-2xl md:text-2xl text-xl">
               NexusMeet
             </span>
@@ -67,7 +69,9 @@ const Dashboard: React.FC = () => {
                 <li id="dashboar-home">
                   <div
                     className={`w-full text-left p-4 hover:bg-gray-100 focus:outline-none  ${
-                      isActive("/dashboard") ? "bg-gray-100 text-primary" : ""
+                      isActive("/dashboard")
+                        ? "bg-gray-100 text-primary"
+                        : "bg-primary text-white"
                     }`}
                   >
                     <a href="/dashboard" className="flex items-center ">
@@ -181,6 +185,14 @@ const Dashboard: React.FC = () => {
                 </li>
               </ul>
             </div>
+            <div id="manage-Booking">
+                  <a href="/home"
+                    className="w-full flex flex-row items-center text-left p-4 hover:bg-gray-100 hover:text-primary border border-primary text-primary focus:outline-none"
+                  >
+                    <ArrowLeft className="w-6 h-6 mr-1" />
+                    Back Home
+                  </a>
+                </div>
           </nav>
         </div>
       </div>
@@ -197,12 +209,16 @@ const Dashboard: React.FC = () => {
             <Logs className="w-8 h-8" />
           </button>
           <div className="flex items-center font-semibold text-lg text-primary">
-            Dashboard Overview
+            <span
+              className="text-[#7ec242] font-bold lg:text-xl md:text-xl text-xl"
+            >
+              NexusMeet Dashboard
+            </span>
           </div>
           <div className="flex items-center space-x-4">
             {/* <!-- Logout --> */}
             <button className="flex items-center btn btn-primary text-white py-1 px-4">
-              <ArrowDownRightFromSquare className="w-5 h-5" />
+              <LogOut className="w-5 h-5" />
               <span className="font-bold ml-2">Logout</span>
             </button>
           </div>

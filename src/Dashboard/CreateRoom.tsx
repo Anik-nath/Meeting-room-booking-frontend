@@ -1,7 +1,3 @@
-
-
 export default function CreateRoom() {
-  return (
-    <div>CreateRoom</div>
-  )
+  return <div>CreateRoom</div>;
 }

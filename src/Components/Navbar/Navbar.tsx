@@ -1,3 +1,5 @@
+import { LogOut } from "lucide-react";
+
 export default function Navbar() {
   const hideNavbarRoutes = [
     "/dashboard",
@@ -39,7 +41,7 @@ export default function Navbar() {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
                 <li>
-                  <a href="/">Home</a>
+                  <a href="/home">Home</a>
                 </li>
                 <li>
                   <a href="/meeting-rooms">Meeting Rooms</a>
@@ -62,7 +64,7 @@ export default function Navbar() {
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal text-gray-700 px-1 gap-2 text-[16px]">
               <li>
-                <a className=" hover:text-primary" href="/">
+                <a className=" hover:text-primary" href="/home">
                   Home
                 </a>
               </li>
@@ -137,7 +139,10 @@ export default function Navbar() {
                   <a href="/mybookings">My Bookings</a>
                 </li>
                 <li className="bg-gray-100 hover:bg-primary hover:text-white rounded-xl py-2 font-semibold">
-                  <button className="text-center">Logout</button>
+                  <button className="text-center flex flex-row gap-2">
+                    <LogOut className="w-4 h-4"></LogOut>
+                    Logout
+                    </button>
                 </li>
               </ul>
             </div>
