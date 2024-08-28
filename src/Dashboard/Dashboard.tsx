@@ -1,4 +1,15 @@
-import { ArrowDownRightFromSquare, BarChart, Cross, Home } from "lucide-react";
+import {
+  ArrowDownRightFromSquare,
+  Blocks,
+  CalendarCheck,
+  CircleX,
+  Home,
+  LayoutList,
+  List,
+  ListCollapse,
+  Logs,
+  SquarePen,
+} from "lucide-react";
 import { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
@@ -25,20 +36,20 @@ const Dashboard: React.FC = () => {
   };
   const location = useLocation();
   const isActive = (path: string) => {
-    return location.pathname === path ? "bg-gray-700" : "";
+    return location.pathname === path ? "bg-gray-100" : "";
   };
   return (
     <div className="flex h-screen">
       {/* <!-- Sidebar --> */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-primary transform ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-gray-200 transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-200 ease-in-out md:translate-x-0 md:static md:flex md:flex-col min-h-screen shadow`}
       >
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          {/* <!-- Sidebar for mobile --> */}
-          <div className="flex  items-center justify-between p-4 bg-white md:hidden">
-            <img className="md:w-10 lg:w-10 w-6" src="./icon.png" alt="" />
+        <div className="flex flex-col flex-1 overflow-y-auto bg-gray-100">
+          {/* <!-- Mobile view logo --> */}
+          <div className="flex items-center justify-between p-4 md:hidden">
+            <img className="md:w-8 lg:w-8 w-6" src="./icon.png" alt="" />
             <span className="text-[#7ec242] font-bold lg:text-2xl md:text-2xl text-xl">
               NexusMeet
             </span>
@@ -46,45 +57,32 @@ const Dashboard: React.FC = () => {
               onClick={closeSidebar}
               className="text-gray-300 focus:outline-none"
             >
-              <Cross></Cross>
+              <CircleX />
             </button>
           </div>
 
-          <nav className="flex flex-col flex-1 overflow-y-auto bg-primary px-2 py-4 gap-10 font-semibold">
-            <div>
-              <a
-                href="/dashboard"
-                className={`flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700 ${isActive(
-                  "/dashboard"
-                )}`}
-              >
-                <BarChart className="w-6 h-6 mr-1" />
-                Dashboard
-              </a>
-            </div>
+          <nav className="flex flex-col flex-1 bg-gray-200 overflow-y-auto bg- px-2 py-4 gap-10 font-semibold">
             <div className="flex flex-col flex-1 gap-3">
               <ul id="menu" className="space-y-2">
-                <li>
+                <li id="dashboar-home">
                   <div
-                    className={`w-full text-left p-4 hover:bg-gray-700 focus:outline-none  ${
-                      isActive("/") ? "bg-gray-700" : ""
+                    className={`w-full text-left p-4 hover:bg-gray-100 focus:outline-none  ${
+                      isActive("/dashboard") ? "bg-gray-100 text-primary" : ""
                     }`}
                   >
-                    <a
-                      href="/"
-                      className="flex items-center  text-gray-100 hover:bg-gray-700"
-                    >
-                      <Home className="w-6 h-6 mr-1" />
-                      Back Home
+                    <a href="/dashboard" className="flex items-center ">
+                      <Logs className="w-6 h-6 mr-1" />
+                      Dashboard
                     </a>
                   </div>
                 </li>
-                <li>
+                <li id="manage-room">
                   <button
-                    className="w-full text-left p-4 hover:bg-gray-700 focus:outline-none"
+                    className="w-full flex flex-row items-center text-left p-4 hover:bg-gray-100 hover:text-primary bg-primary text-white focus:outline-none "
                     onClick={() => toggleSubmenu("menu1")}
                   >
-                    Room Management
+                    <Home className="w-6 h-6 mr-1" />
+                    Manage Room
                   </button>
                   <ul
                     id="menu1"
@@ -95,27 +93,34 @@ const Dashboard: React.FC = () => {
                     <li>
                       <a
                         href="/create-room"
-                        className="block p-2 hover:bg-gray-700"
+                        className="block p-2 hover:bg-primary hover:text-white bg-gray-100 text-primary mt-2"
                       >
-                        Create Room
+                        <span className="flex flex-row items-center gap-1">
+                          <SquarePen />
+                          Create Room
+                        </span>
                       </a>
                     </li>
                     <li>
                       <a
                         href="/room-list"
-                        className="block p-2 hover:bg-gray-700"
+                        className="block p-2 hover:bg-primary hover:text-white bg-gray-100 text-primary"
                       >
-                        Room List
+                        <span className="flex flex-row items-center gap-1">
+                          <ListCollapse />
+                          Room List
+                        </span>
                       </a>
                     </li>
                   </ul>
                 </li>
-                <li>
+                <li id="manage-slots">
                   <button
-                    className="w-full text-left p-4 hover:bg-gray-700 focus:outline-none"
+                    className="w-full flex flex-row items-center text-left p-4 hover:bg-gray-100 hover:text-primary bg-primary text-white focus:outline-none"
                     onClick={() => toggleSubmenu("menu2")}
                   >
-                    Slots Management
+                    <Blocks className="w-6 h-6 mr-1" />
+                    Manage Slots
                   </button>
                   <ul
                     id="menu2"
@@ -126,27 +131,34 @@ const Dashboard: React.FC = () => {
                     <li>
                       <a
                         href="/create-slot"
-                        className="block p-2 hover:bg-gray-700"
+                        className="block p-2 hover:bg-primary hover:text-white bg-gray-100 text-primary mt-2"
                       >
-                        Create Slot
+                        <span className="flex flex-row items-center gap-1">
+                          <SquarePen />
+                          Create Slots
+                        </span>
                       </a>
                     </li>
                     <li>
                       <a
                         href="/slot-list"
-                        className="block p-2 hover:bg-gray-700"
+                        className="block p-2 hover:bg-primary hover:text-white bg-gray-100 text-primary mt-2"
                       >
-                        Slots List
+                        <span className="flex flex-row items-center gap-1">
+                          <LayoutList />
+                          Slots List
+                        </span>
                       </a>
                     </li>
                   </ul>
                 </li>
-                <li>
+                <li id="manage-Booking ">
                   <button
-                    className="w-full text-left p-4 hover:bg-gray-700 focus:outline-none"
+                    className="w-full flex flex-row items-center text-left p-4 hover:bg-gray-100 hover:text-primary bg-primary text-white focus:outline-none"
                     onClick={() => toggleSubmenu("menu3")}
                   >
-                    Booking Management
+                    <CalendarCheck className="w-6 h-6 mr-1" />
+                    Manage Booking
                   </button>
                   <ul
                     id="menu3"
@@ -157,9 +169,12 @@ const Dashboard: React.FC = () => {
                     <li>
                       <a
                         href="/booking-list"
-                        className="block p-2 hover:bg-gray-700"
+                        className="block p-2 hover:bg-primary hover:text-white bg-gray-100 text-primary mt-2"
                       >
-                        Booking List
+                        <span className="flex flex-row items-center gap-1">
+                          <List />
+                          Booking List
+                        </span>
                       </a>
                     </li>
                   </ul>
@@ -173,23 +188,20 @@ const Dashboard: React.FC = () => {
       {/* <!-- Main content --> */}
       <div className="flex flex-col flex-1 overflow-y-auto">
         {/* <!-- Top bar --> */}
-        <div className="flex items-center justify-between h-16 bg-gray-800 border-teal-500 border-b px-4">
+        <div className="flex items-center justify-between h-16 border-b px-4 py-10">
           {/* <!-- Sidebar toggle --> */}
           <button
             onClick={toggleSidebar}
-            className="md:hidden text-gray-300 focus:outline-none"
+            className="md:hidden text-primary focus:outline-none"
           >
-            <BarChart className="w-6 h-6" />
+            <Logs className="w-8 h-8" />
           </button>
-          <div className="flex items-center font-bold">
-            <img className="md:w-10 lg:w-10 w-6" src="./icon.png" alt="" />
-            <span className="text-[#7ec242] font-bold lg:text-2xl md:text-2xl text-xl">
-              NexusMeet
-            </span>
+          <div className="flex items-center font-semibold text-lg text-primary">
+            Dashboard Overview
           </div>
           <div className="flex items-center space-x-4">
             {/* <!-- Logout --> */}
-            <button className="flex items-center gradient-border hover:bg-gray-800 text-gray-300 py-1 px-4">
+            <button className="flex items-center btn btn-primary text-white py-1 px-4">
               <ArrowDownRightFromSquare className="w-5 h-5" />
               <span className="font-bold ml-2">Logout</span>
             </button>
