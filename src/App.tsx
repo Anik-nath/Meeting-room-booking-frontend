@@ -13,6 +13,8 @@ import MeetingRooms from "./pages/MeetingRooms";
 import RoomDetails from "./pages/RoomDetails";
 import Checkout from "./pages/Checkout";
 import Mybooking from "./pages/Mybooking";
+import Dashboard from "./Dashboard/Dashboard";
+import DashboardHome from "./Dashboard/DashboardHome";
 
 function App() {
   return (
@@ -28,6 +30,9 @@ function App() {
         <Route path="/mybookings" element={<Mybooking />}></Route>
         <Route path="/signin" element={<SignIn />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
+        <Route path="/dashboard" element={<Dashboard></Dashboard>}>
+          <Route index element={<DashboardHome></DashboardHome>}></Route>
+        </Route>
         <Route path="*" element={<ErrorPage />}></Route>
       </Routes>
       <ScrollToTop viewBox="0 0 160 256" smooth color="#7ec242" />

@@ -36,7 +36,9 @@ export default function Mybooking() {
                 <td>Zemlak, Daniel and Leannon</td>
                 <td>Purple</td>
                 <th>
-                <div className="badge badge-primary badge-outline font-normal">Confirm</div>
+                  <div className="badge badge-primary badge-outline font-normal">
+                    Confirm
+                  </div>
                 </th>
               </tr>
               <tr className="border-gray-300 text-gray-700">
@@ -59,7 +61,9 @@ export default function Mybooking() {
                 <td>Zemlak, Daniel and Leannon</td>
                 <td>Purple</td>
                 <th>
-                <div className="badge badge-error badge-outline font-normal">Unconfirm</div>
+                  <div className="badge badge-error badge-outline font-normal">
+                    Unconfirm
+                  </div>
                 </th>
               </tr>
             </tbody>
