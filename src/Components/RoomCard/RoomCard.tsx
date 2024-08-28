@@ -24,7 +24,7 @@ const RoomCard: React.FC<TRoom> = ({ room }) => {
             <span className="font-semibold">$500</span>
           </p>
           <a
-            href="#"
+            href="/details"
             className="btn-secondary text-white inline-block text-center md:mt-0 mt-4"
           >
             Details

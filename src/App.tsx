@@ -10,6 +10,8 @@ import ErrorPage from "./pages/ErrorPage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import MeetingRooms from "./pages/MeetingRooms";
+import RoomDetails from "./pages/RoomDetails";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/about-us" element={<AboutUs />}></Route>
         <Route path="/contact-us" element={<ContactUs />}></Route>
         <Route path="/meeting-rooms" element={<MeetingRooms />}></Route>
+        <Route path="/details" element={<RoomDetails />}></Route>
+        <Route path="/checkout" element={<Checkout />}></Route>
         <Route path="/signin" element={<SignIn />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="*" element={<ErrorPage />}></Route>
