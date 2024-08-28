@@ -107,13 +107,13 @@ export default function Navbar() {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-primary rounded-box z-[1] mt-3 w-52 p-2 shadow gap-2"
+            className="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow gap-2"
           >
-            <li>
-              <a>My Bookings</a>
+            <li className="border-b py-2 hover:bg-gray-100 rounded-xl font-semibold">
+              <a href="/mybookings">My Bookings</a>
             </li>
-            <li>
-              <button className="bg-red-300 w-1/2  btn-secondary text-center ml-3">
+            <li className="bg-gray-100 hover:bg-primary hover:text-white rounded-xl py-2 font-semibold">
+              <button className="text-center">
                 Logout
               </button>
             </li>

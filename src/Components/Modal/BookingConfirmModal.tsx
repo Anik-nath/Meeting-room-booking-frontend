@@ -24,7 +24,7 @@ export default function BookingConfirmModal({
     if (modal) {
       modal.close();
     }
-    navigate("/meeting-rooms");
+    navigate("/mybookings");
   };
   return (
     <>
@@ -41,7 +41,10 @@ export default function BookingConfirmModal({
             <span className="font-semibold">{confirmData.totalCost}</span>.
           </p>
           <div className="modal-action">
-            <button className="btn-primary text-white" onClick={handleCloseModal}>
+            <button
+              className="btn-primary text-white"
+              onClick={handleCloseModal}
+            >
               Close
             </button>
           </div>

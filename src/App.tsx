@@ -12,6 +12,7 @@ import SignUp from "./pages/SignUp";
 import MeetingRooms from "./pages/MeetingRooms";
 import RoomDetails from "./pages/RoomDetails";
 import Checkout from "./pages/Checkout";
+import Mybooking from "./pages/Mybooking";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/meeting-rooms" element={<MeetingRooms />}></Route>
         <Route path="/details" element={<RoomDetails />}></Route>
         <Route path="/checkout" element={<Checkout />}></Route>
+        <Route path="/mybookings" element={<Mybooking />}></Route>
         <Route path="/signin" element={<SignIn />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="*" element={<ErrorPage />}></Route>
