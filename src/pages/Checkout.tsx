@@ -1,8 +1,30 @@
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import BookingConfirmModal from "../Components/Modal/BookingConfirmModal";
 
 export default function Checkout() {
   const location = useLocation();
+
   const { date, time, user, totalCost } = location.state || {};
+  const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
+
+  const handleConfirmBooking = () => {
+    setIsBookingConfirmed(true);
+    const modal = document.getElementById(
+      "confirmation-modal"
+    ) as HTMLDialogElement;
+    if (modal) {
+      modal.showModal();
+    }
+  };
+
+  const confirmData = {
+    date,
+    time,
+    user,
+    totalCost,
+  };
+
   return (
     <div className="bg-primary dark:bg-gray-900">
       <div id="checkout-card-wrapper" className="w-full max-w-3xl mx-auto p-8">
@@ -31,6 +53,7 @@ export default function Checkout() {
                   id="name"
                   value={user.name}
                   className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                  readOnly
                 />
               </div>
               <div>
@@ -45,6 +68,7 @@ export default function Checkout() {
                   id="email"
                   value={user.email}
                   className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                  readOnly
                 />
               </div>
             </div>
@@ -61,6 +85,7 @@ export default function Checkout() {
                   value={date}
                   id="date"
                   className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                  readOnly
                 />
               </div>
               <div>
@@ -75,6 +100,7 @@ export default function Checkout() {
                   value={time}
                   id="time"
                   className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                  readOnly
                 />
               </div>
             </div>
@@ -140,14 +166,22 @@ export default function Checkout() {
               </div>
             </div>
           </div>
-
+          {/* confirm button */}
           <div id="confirm-button" className="mt-8 flex justify-end">
-            <button className="btn btn-primary text-white ">
+            <button
+              className="btn btn-primary text-white"
+              onClick={handleConfirmBooking}
+            >
               Confirm Booking
             </button>
           </div>
         </div>
       </div>
+
+      {/* Confirmation Modal */}
+      {isBookingConfirmed && (
+        <BookingConfirmModal confirmData={confirmData}></BookingConfirmModal>
+      )}
     </div>
   );
 }
