@@ -1,7 +1,14 @@
 import { Home, MailIcon, Phone } from "lucide-react";
 
 export default function Footer() {
-  const hideFooterRoutes = ["/dashboard"];
+  const hideFooterRoutes = [
+    "/dashboard",
+    "/dashboard/create-room",
+    "/dashboard/room-list",
+    "/dashboard/create-slot",
+    "/dashboard/slot-list",
+    "/dashboard/booking-list",
+  ];
   const isFooterVisible = !hideFooterRoutes.includes(location.pathname);
   return (
     <>

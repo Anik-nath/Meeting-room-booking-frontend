@@ -1,5 +1,12 @@
 export default function Navbar() {
-  const hideNavbarRoutes = ["/dashboard"];
+  const hideNavbarRoutes = [
+    "/dashboard",
+    "/dashboard/create-room",
+    "/dashboard/room-list",
+    "/dashboard/create-slot",
+    "/dashboard/slot-list",
+    "/dashboard/booking-list",
+  ];
   const isNavbarVisible = !hideNavbarRoutes.includes(location.pathname);
   return (
     <>

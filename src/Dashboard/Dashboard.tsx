@@ -92,7 +92,7 @@ const Dashboard: React.FC = () => {
                   >
                     <li>
                       <a
-                        href="/create-room"
+                        href="/dashboard/create-room"
                         className="block p-2 hover:bg-primary hover:text-white bg-gray-100 text-primary mt-2"
                       >
                         <span className="flex flex-row items-center gap-1">
@@ -103,7 +103,7 @@ const Dashboard: React.FC = () => {
                     </li>
                     <li>
                       <a
-                        href="/room-list"
+                        href="/dashboard/room-list"
                         className="block p-2 hover:bg-primary hover:text-white bg-gray-100 text-primary"
                       >
                         <span className="flex flex-row items-center gap-1">
@@ -130,7 +130,7 @@ const Dashboard: React.FC = () => {
                   >
                     <li>
                       <a
-                        href="/create-slot"
+                        href="/dashboard/create-slot"
                         className="block p-2 hover:bg-primary hover:text-white bg-gray-100 text-primary mt-2"
                       >
                         <span className="flex flex-row items-center gap-1">
@@ -141,7 +141,7 @@ const Dashboard: React.FC = () => {
                     </li>
                     <li>
                       <a
-                        href="/slot-list"
+                        href="/dashboard/slot-list"
                         className="block p-2 hover:bg-primary hover:text-white bg-gray-100 text-primary mt-2"
                       >
                         <span className="flex flex-row items-center gap-1">
@@ -168,7 +168,7 @@ const Dashboard: React.FC = () => {
                   >
                     <li>
                       <a
-                        href="/booking-list"
+                        href="/dashboard/booking-list"
                         className="block p-2 hover:bg-primary hover:text-white bg-gray-100 text-primary mt-2"
                       >
                         <span className="flex flex-row items-center gap-1">

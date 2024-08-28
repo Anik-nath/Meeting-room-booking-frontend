@@ -15,6 +15,11 @@ import Checkout from "./pages/Checkout";
 import Mybooking from "./pages/Mybooking";
 import Dashboard from "./Dashboard/Dashboard";
 import DashboardHome from "./Dashboard/DashboardHome";
+import CreateRoom from "./Dashboard/CreateRoom";
+import RoomList from "./Dashboard/RoomList";
+import CreateSlot from "./Dashboard/CreateSlot";
+import SlotList from "./Dashboard/SlotList";
+import BookingList from "./Dashboard/BookingList";
 
 function App() {
   return (
@@ -32,6 +37,20 @@ function App() {
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/dashboard" element={<Dashboard></Dashboard>}>
           <Route index element={<DashboardHome></DashboardHome>}></Route>
+          <Route
+            path="create-room"
+            element={<CreateRoom></CreateRoom>}
+          ></Route>
+          <Route path="room-list" element={<RoomList></RoomList>}></Route>
+          <Route
+            path="create-slot"
+            element={<CreateSlot></CreateSlot>}
+          ></Route>
+          <Route path="slot-list" element={<SlotList></SlotList>}></Route>
+          <Route
+            path="booking-list"
+            element={<BookingList></BookingList>}
+          ></Route>
         </Route>
         <Route path="*" element={<ErrorPage />}></Route>
       </Routes>
