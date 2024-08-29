@@ -17,7 +17,7 @@ export default function CustomerReview() {
           experiences with our intuitive platform.
         </p>
         <div>
-          <a className="btn-secondary btn" href="/meeting-rooms">
+          <a className="btn-secondary btn" href="/rooms">
             <span>See More</span>
             <span>
               <SquareArrowUpRight className="w-6 h-6" />

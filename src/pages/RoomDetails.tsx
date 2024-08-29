@@ -1,8 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useGetRoomByIdQuery } from "../Redux/Api/roomApi";
 
 export default function RoomDetails() {
+  const { id } = useParams<{ id: string }>();
+  const { data: response } = useGetRoomByIdQuery(id!);
+  const room = response?.data;
+
+
   const [selectedDate, setSelectedDate] = useState(null);
   const [availableSlots, setAvailableSlots] = useState([
     { time: "10:00 AM", isBooked: false },
@@ -10,6 +16,7 @@ export default function RoomDetails() {
     { time: "12:00 PM", isBooked: true },
   ]);
   const [selectedSlot, setSelectedSlot] = useState(null);
+
   const user = {
     name: "John Doe",
     email: "john.doe@example.com",
@@ -82,23 +89,23 @@ export default function RoomDetails() {
         {/* details */}
         <div id="room-details-part" className="py-8 col-span-2">
           <h2 id="room-name" className="text-white text-2xl font-semibold">
-            Room Name - NexuxMeet A1 Collabe Room
+            Room Name - {room?.name}
           </h2>
           <p id="room-id" className="text-white text-md">
-            Room No - NexuxMeet A1
+            Room No - {room?.roomNo}
           </p>
           {/* room details */}
           <div id="room-detils" className="w-full flex flex-row gap-4 mt-6">
             <div className="bg-white font-semibold rounded-md h-24 w-28 flex flex-col justify-center items-center gap-2">
-              <span>10</span>
+              <span>{room?.floorNo}</span>
               <p>Floor No</p>
             </div>
             <div className="bg-white font-semibold rounded-md h-24 w-28 flex flex-col justify-center items-center gap-2">
-              <span>50</span>
+              <span>{room?.capacity}</span>
               <p>Capacity</p>
             </div>
             <div className="bg-white font-semibold rounded-md h-24 w-28 flex flex-col justify-center items-center gap-2">
-              <span>100</span>
+              <span>{room?.pricePerSlot}</span>
               <p>Price</p>
             </div>
           </div>
@@ -110,20 +117,11 @@ export default function RoomDetails() {
             Room Amenities
           </h2>
           <div id="amenities-part" className="grid grid-cols-2 gap-4 mt-8">
-            <div className="bg-white p-2 rounded-md py-4">High-Speed Wi-Fi</div>
-            <div className="bg-white p-2 rounded-md py-4">
-              Projector and Screen
-            </div>
-            <div className="bg-white p-2 rounded-md py-4">
-              Whiteboard and Markers
-            </div>
-            <div className="bg-white p-2 rounded-md py-4">
-              Conference Call Facilities
-            </div>
-            <div className="bg-white p-2 rounded-md py-4">Air Conditioning</div>
-            <div className="bg-white p-2 rounded-md py-4">
-              Complimentary Water and Coffee
-            </div>
+            {room?.amenities.map((item,index) => (
+              <div key={index} className="bg-white p-2 rounded-md py-4">
+                {item}
+              </div>
+            ))}
           </div>
         </div>
         {/* booking card */}

@@ -22,7 +22,7 @@ export default function SignIn() {
         position: "top-center",
         autoClose: 2000,
       });
-      navigate("/meeting-rooms");
+      navigate("/rooms");
     } catch (err) {
       console.error("Failed to sign in:", err);
       toast.error("Failed to sign in. Please try again.");

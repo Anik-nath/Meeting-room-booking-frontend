@@ -24,7 +24,21 @@ export type TAuth = {
   userData: TuserData | null;
 };
 
+export type TResponse = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: TRoom[];
+};
+export type TResponseByID = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: TRoom;
+};
+
 export type TRoom = {
+  _id:string;
   name: string;
   roomNo: number;
   floorNo: number;

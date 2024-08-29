@@ -1,8 +1,6 @@
 import { ArrowDown } from "lucide-react";
 import RoomCard from "../Components/RoomCard/RoomCard";
-import { sample } from "../Components/FeaturedRoom/FeaturedRoom";
 import { useRef } from "react";
-import { useAppDispatch } from "../Redux/hook";
 import { useGetRoomsQuery } from "../Redux/Api/roomApi";
 
 const MeetingRooms = () => {
@@ -16,8 +14,9 @@ const MeetingRooms = () => {
   };
 
   //  fetch data using Redux
-  const dispatch = useAppDispatch();
-  const { data: rooms, error, isLoading } = useGetRoomsQuery();
+  const { data } = useGetRoomsQuery();
+  const Allrooms = data?.data;
+  // console.log(Allrooms);
 
   return (
     <>
@@ -152,15 +151,15 @@ const MeetingRooms = () => {
               {/* show all products start */}
               {
                 <div className="grid lg:grid-cols-3 grid-cols-2 gap-4">
-                  {sample.map((room) => (
-                    <RoomCard key={room.id} room={room}></RoomCard>
+                  {Allrooms?.map((room) => (
+                    <RoomCard key={room._id} room={room}></RoomCard>
                   ))}
                 </div>
               }
               {/* show all products end*/}
-              {sample?.length === 0 ? (
+              {Allrooms?.length === 0 ? (
                 <div id="noProducts">
-                  <div className="bg-gray-800 border border-dashed border-gray-600 flex justify-center items-center py-4 h-screen w-full">
+                  <div className="bg-gray-100 rounded-xl flex justify-center items-center py-4 h-screen w-full">
                     <div className="flex justify-center flex-col items-center">
                       <p className="text-lg text-gray-400">
                         No Products Found !

@@ -8,7 +8,7 @@ export default function Hero() {
         <h1 className="text-5xl font-bold py-4">Book your ideal meeting room with ease.</h1>
         <h3 className="text-2xl mb-6">Efficient, hassle-free room booking for all your meeting needs.</h3>
         <div>
-        <a className="btn-secondary btn" href="/meeting-rooms">
+        <a className="btn-secondary btn" href="/rooms">
         <span><CalendarPlus className='w-6 h-6' /></span>
         Book Now
         </a>

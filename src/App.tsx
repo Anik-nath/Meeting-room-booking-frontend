@@ -25,6 +25,7 @@ import { useEffect } from "react";
 import { setUser } from "./Redux/FeatureSlice/userSlice";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -45,22 +46,30 @@ function App() {
         <Route path="/home" element={<Home />}></Route>
         <Route path="/about-us" element={<AboutUs />}></Route>
         <Route path="/contact-us" element={<ContactUs />}></Route>
-        <Route path="/meeting-rooms" element={<MeetingRooms />}></Route>
-        <Route path="/details" element={<RoomDetails />}></Route>
-        <Route path="/checkout" element={<Checkout />}></Route>
-        <Route path="/mybookings" element={<Mybooking />}></Route>
         <Route path="/signin" element={<SignIn />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
-        <Route path="/dashboard" element={<Dashboard></Dashboard>}>
-          <Route index element={<DashboardHome></DashboardHome>}></Route>
-          <Route path="create-room" element={<CreateRoom></CreateRoom>}></Route>
-          <Route path="room-list" element={<RoomList></RoomList>}></Route>
-          <Route path="create-slot" element={<CreateSlot></CreateSlot>}></Route>
-          <Route path="slot-list" element={<SlotList></SlotList>}></Route>
-          <Route
-            path="booking-list"
-            element={<BookingList></BookingList>}
-          ></Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/rooms" element={<MeetingRooms />}></Route>
+          <Route path="/rooms/:id" element={<RoomDetails />}></Route>
+          <Route path="/checkout" element={<Checkout />}></Route>
+          <Route path="/mybookings" element={<Mybooking />}></Route>
+          <Route path="/dashboard" element={<Dashboard></Dashboard>}>
+            <Route index element={<DashboardHome></DashboardHome>}></Route>
+            <Route
+              path="create-room"
+              element={<CreateRoom></CreateRoom>}
+            ></Route>
+            <Route path="room-list" element={<RoomList></RoomList>}></Route>
+            <Route
+              path="create-slot"
+              element={<CreateSlot></CreateSlot>}
+            ></Route>
+            <Route path="slot-list" element={<SlotList></SlotList>}></Route>
+            <Route
+              path="booking-list"
+              element={<BookingList></BookingList>}
+            ></Route>
+          </Route>
         </Route>
         <Route path="*" element={<ErrorPage />}></Route>
       </Routes>

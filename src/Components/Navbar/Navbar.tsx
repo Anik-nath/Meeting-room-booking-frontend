@@ -64,7 +64,7 @@ export default function Navbar() {
                   <a href="/home">Home</a>
                 </li>
                 <li>
-                  <a href="/meeting-rooms">Meeting Rooms</a>
+                  <a href="/rooms">Meeting Rooms</a>
                 </li>
                 <li>
                   <a href="/about-us">About Us</a>
@@ -89,7 +89,7 @@ export default function Navbar() {
                 </a>
               </li>
               <li>
-                <a className=" hover:text-primary" href="/meeting-rooms">
+                <a className=" hover:text-primary" href="/rooms">
                   Meeting Rooms
                 </a>
               </li>
