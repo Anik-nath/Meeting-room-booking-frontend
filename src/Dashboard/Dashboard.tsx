@@ -1,5 +1,6 @@
 import {
   ArrowLeft,
+  Bell,
   Blocks,
   CalendarCheck,
   CircleX,
@@ -186,13 +187,14 @@ const Dashboard: React.FC = () => {
               </ul>
             </div>
             <div id="manage-Booking">
-                  <a href="/home"
-                    className="w-full flex flex-row items-center text-left p-4 hover:bg-gray-100 hover:text-primary border border-primary text-primary focus:outline-none"
-                  >
-                    <ArrowLeft className="w-6 h-6 mr-1" />
-                    Back Home
-                  </a>
-                </div>
+              <a
+                href="/home"
+                className="w-full flex flex-row items-center text-left p-4 hover:bg-gray-100 hover:text-primary border border-primary text-primary focus:outline-none"
+              >
+                <ArrowLeft className="w-6 h-6 mr-1" />
+                Back Home
+              </a>
+            </div>
           </nav>
         </div>
       </div>
@@ -209,17 +211,21 @@ const Dashboard: React.FC = () => {
             <Logs className="w-8 h-8" />
           </button>
           <div className="flex items-center font-semibold text-lg text-primary">
-            <span
-              className="text-[#7ec242] font-bold lg:text-xl md:text-xl text-xl"
-            >
+            <span className="text-[#7ec242] font-bold lg:text-xl md:text-xl text-md">
               NexusMeet Dashboard
             </span>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center md:space-x-8 space-x-4">
+            <div id="notification" className="indicator">
+              <span className="indicator-item rounded-full text-sm text-white badge-primary">
+                99+
+              </span>
+              <Bell className="text-gray-600"></Bell>
+            </div>
             {/* <!-- Logout --> */}
-            <button className="flex items-center btn btn-primary text-white py-1 px-4">
+            <button className="flex items-center bg-primary px-4 rounded-full py-1 text-white hover:bg-[#a3cf66]">
               <LogOut className="w-5 h-5" />
-              <span className="font-bold ml-2">Logout</span>
+              <span className="font-normal md:ml-2">Logout</span>
             </button>
           </div>
         </div>

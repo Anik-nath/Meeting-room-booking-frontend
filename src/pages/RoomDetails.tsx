@@ -89,16 +89,16 @@ export default function RoomDetails() {
           </p>
           {/* room details */}
           <div id="room-detils" className="w-full flex flex-row gap-4 mt-6">
-            <div className="bg-white rounded-md h-24 w-28 flex flex-col justify-center items-center gap-2">
-              <span></span>
+            <div className="bg-white font-semibold rounded-md h-24 w-28 flex flex-col justify-center items-center gap-2">
+              <span>10</span>
               <p>Floor No</p>
             </div>
-            <div className="bg-white rounded-md h-24 w-28 flex flex-col justify-center items-center gap-2">
-              <span></span>
+            <div className="bg-white font-semibold rounded-md h-24 w-28 flex flex-col justify-center items-center gap-2">
+              <span>50</span>
               <p>Capacity</p>
             </div>
-            <div className="bg-white rounded-md h-24 w-28 flex flex-col justify-center items-center gap-2">
-              <span></span>
+            <div className="bg-white font-semibold rounded-md h-24 w-28 flex flex-col justify-center items-center gap-2">
+              <span>100</span>
               <p>Price</p>
             </div>
           </div>
@@ -110,22 +110,27 @@ export default function RoomDetails() {
             Room Amenities
           </h2>
           <div id="amenities-part" className="grid grid-cols-2 gap-4 mt-8">
-            <div className="bg-white p-2 rounded-md">High-Speed Wi-Fi</div>
-            <div className="bg-white p-2 rounded-md">Projector and Screen</div>
-            <div className="bg-white p-2 rounded-md">
+            <div className="bg-white p-2 rounded-md py-4">High-Speed Wi-Fi</div>
+            <div className="bg-white p-2 rounded-md py-4">
+              Projector and Screen
+            </div>
+            <div className="bg-white p-2 rounded-md py-4">
               Whiteboard and Markers
             </div>
-            <div className="bg-white p-2 rounded-md">
+            <div className="bg-white p-2 rounded-md py-4">
               Conference Call Facilities
             </div>
-            <div className="bg-white p-2 rounded-md">Air Conditioning</div>
-            <div className="bg-white p-2 rounded-md">
+            <div className="bg-white p-2 rounded-md py-4">Air Conditioning</div>
+            <div className="bg-white p-2 rounded-md py-4">
               Complimentary Water and Coffee
             </div>
           </div>
         </div>
         {/* booking card */}
-        <div id="booking-card-part" className="bg-white p-4 rounded-md w-full">
+        <div
+          id="booking-card-part"
+          className="bg-white p-4 rounded-md w-full md:my-10 my-0"
+        >
           <h2 className="border-b py-4 mb-4 text-lg font-semibold">
             <span className="text-2xl">${pricePerSlot}</span>/ Per Slot
           </h2>
@@ -138,7 +143,7 @@ export default function RoomDetails() {
               id="date"
               value={selectedDate || ""}
               onChange={handleDateChange}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
           <div className="mb-4">
@@ -152,10 +157,10 @@ export default function RoomDetails() {
                   onClick={() => handleSlotSelection(slot)}
                   className={`px-3 py-2 rounded-lg ${
                     slot.isBooked
-                      ? "bg-gray-300 cursor-not-allowed"
+                      ? "bg-red-100 cursor-not-allowed"
                       : selectedSlot === slot.time
-                      ? "bg-blue-500 text-white"
-                      : "bg-blue-100 hover:bg-blue-200"
+                      ? "bg-primary text-white"
+                      : "bg-gray-200 hover:bg-gray-300"
                   }`}
                   disabled={slot.isBooked}
                 >
@@ -171,19 +176,19 @@ export default function RoomDetails() {
               type="text"
               value={user.name}
               readOnly
-              className="w-full px-3 py-2 mb-2 border rounded-lg bg-gray-100"
+              className="w-full px-3 py-2 mb-2 border rounded-lg bg-gray-100 focus:outline-none"
             />
             <input
               type="email"
               value={user.email}
               readOnly
-              className="w-full px-3 py-2 border rounded-lg bg-gray-100"
+              className="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none"
             />
           </div>
           {/* Display Total Cost */}
           <div className="mb-4">
-            <h2 className="text-gray-700 text-lg font-semibold">
-              Total Cost:{" "}
+            <h2 className="text-gray-700 text-lg font-semibold flex justify-between items-center">
+              Total Cost:
               <span className="text-2xl">
                 ${selectedSlot ? pricePerSlot : 0}
               </span>
@@ -193,7 +198,11 @@ export default function RoomDetails() {
           <button
             onClick={handleConfirmBooking}
             disabled={!selectedDate || !selectedSlot}
-            className="btn btn-primary text-white"
+            className={`${
+              !selectedDate || !selectedSlot
+                ? "hidden"
+                : "btn btn-primary text-white "
+            }`}
           >
             Book Now
           </button>

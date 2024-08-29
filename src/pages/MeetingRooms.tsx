@@ -12,6 +12,7 @@ const MeetingRooms = () => {
       roomsRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
+  
   return (
     <>
       <section
