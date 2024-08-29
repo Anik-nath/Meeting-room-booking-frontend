@@ -2,6 +2,8 @@ import { ArrowDown } from "lucide-react";
 import RoomCard from "../Components/RoomCard/RoomCard";
 import { sample } from "../Components/FeaturedRoom/FeaturedRoom";
 import { useRef } from "react";
+import { useAppDispatch } from "../Redux/hook";
+import { useGetRoomsQuery } from "../Redux/Api/roomApi";
 
 const MeetingRooms = () => {
   const rangeRef = useRef<HTMLInputElement>(null);
@@ -12,7 +14,11 @@ const MeetingRooms = () => {
       roomsRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
-  
+
+  //  fetch data using Redux
+  const dispatch = useAppDispatch();
+  const { data: rooms, error, isLoading } = useGetRoomsQuery();
+
   return (
     <>
       <section

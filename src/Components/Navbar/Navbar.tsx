@@ -1,4 +1,8 @@
 import { LogOut } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "../../Redux/hook";
+import { useNavigate } from "react-router-dom";
+import { clearUser } from "../../Redux/FeatureSlice/userSlice";
+import { toast } from "react-toastify";
 
 export default function Navbar() {
   const hideNavbarRoutes = [
@@ -10,6 +14,22 @@ export default function Navbar() {
     "/dashboard/booking-list",
   ];
   const isNavbarVisible = !hideNavbarRoutes.includes(location.pathname);
+
+  const ResultuserData = useAppSelector((state) => state.user.userData);
+
+  //  logout using Redux and local storage to store credentials
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    dispatch(clearUser());
+    toast.success("You Just Logout!",{
+      position: "top-center",
+      autoClose: 2000,
+    });
+    navigate("/signin");
+  };
+
   return (
     <>
       {isNavbarVisible && (
@@ -80,16 +100,26 @@ export default function Navbar() {
               </li>
               <li>
                 <a className=" hover:text-primary" href="/contact-us">
-                  {" "}
                   Contact Us
                 </a>
               </li>
             </ul>
           </div>
           <div className="navbar-end flex flex-row items-center gap-4">
-            <a href="/signin" className="btn-primary text-white">
-              Sign in
-            </a>
+            {ResultuserData?.email ? (
+              <button
+                onClick={handleLogOut}
+                className="flex flex-row gap-1 items-center btn-primary text-white"
+              >
+                <LogOut className="w-4 h-4"></LogOut>
+                Logout
+              </button>
+            ) : (
+              <a href="/signin" className="btn-primary text-white">
+                Sign in
+              </a>
+            )}
+            {/* theme controller */}
             <div id="theme-controller">
               <label className="swap swap-rotate">
                 <input
@@ -115,23 +145,41 @@ export default function Navbar() {
                 </svg>
               </label>
             </div>
-            <div id="avatar" className="dropdown dropdown-end">
+            <div id="avatar" className="dropdown dropdown-end ">
               <div
                 tabIndex={0}
                 role="button"
                 className="btn btn-ghost btn-circle avatar"
               >
-                <div className="w-8 rounded-full">
+                <div className="w-10 rounded-full">
                   <img
                     alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    src="https://i.postimg.cc/CxF3mJ8s/free-user-icon-3297-thumb.png"
                   />
                 </div>
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow gap-2"
+                className="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-80 p-2 shadow gap-2"
               >
+                {/* loggin user profile */}
+                {ResultuserData?.email ? (
+                  <div
+                    id="loggein User Details"
+                    className="bg-gray-100 w-full flex flex-col justify-center items-center rounded-xl py-2"
+                  >
+                    <h2 className="text-xs">{ResultuserData?.name}</h2>
+                    <div className="w-10 rounded-full py-1">
+                      <img
+                        alt="loggin user profile picture"
+                        src="https://i.postimg.cc/CLM722v5/userbluel.png"
+                      />
+                    </div>
+                    <p className="text-xs">{ResultuserData?.email}</p>
+                  </div>
+                ) : (
+                  ""
+                )}
                 <li className="border-b py-2 hover:bg-gray-100 rounded-xl font-semibold">
                   <a href="/dashboard">Dashboard</a>
                 </li>
@@ -139,10 +187,13 @@ export default function Navbar() {
                   <a href="/mybookings">My Bookings</a>
                 </li>
                 <li className="bg-gray-100 hover:bg-primary hover:text-white rounded-xl py-2 font-semibold">
-                  <button className="text-center flex flex-row gap-2">
+                  <button
+                    onClick={handleLogOut}
+                    className="text-center flex flex-row gap-2"
+                  >
                     <LogOut className="w-4 h-4"></LogOut>
                     Logout
-                    </button>
+                  </button>
                 </li>
               </ul>
             </div>

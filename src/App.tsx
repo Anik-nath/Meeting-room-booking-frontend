@@ -20,8 +20,23 @@ import RoomList from "./Dashboard/RoomList";
 import CreateSlot from "./Dashboard/CreateSlot";
 import SlotList from "./Dashboard/SlotList";
 import BookingList from "./Dashboard/BookingList";
+import { useAppDispatch } from "./Redux/hook";
+import { useEffect } from "react";
+import { setUser } from "./Redux/FeatureSlice/userSlice";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const userData = localStorage.getItem("userData");
+
+    if (token && userData) {
+      dispatch(setUser({ token, userData: JSON.parse(userData) }));
+    }
+  }, [dispatch]);
   return (
     <BrowserRouter>
       <Navbar></Navbar>
@@ -38,15 +53,9 @@ function App() {
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/dashboard" element={<Dashboard></Dashboard>}>
           <Route index element={<DashboardHome></DashboardHome>}></Route>
-          <Route
-            path="create-room"
-            element={<CreateRoom></CreateRoom>}
-          ></Route>
+          <Route path="create-room" element={<CreateRoom></CreateRoom>}></Route>
           <Route path="room-list" element={<RoomList></RoomList>}></Route>
-          <Route
-            path="create-slot"
-            element={<CreateSlot></CreateSlot>}
-          ></Route>
+          <Route path="create-slot" element={<CreateSlot></CreateSlot>}></Route>
           <Route path="slot-list" element={<SlotList></SlotList>}></Route>
           <Route
             path="booking-list"
@@ -57,6 +66,7 @@ function App() {
       </Routes>
       <ScrollToTop viewBox="0 0 160 256" smooth color="#7ec242" />
       <Footer></Footer>
+      <ToastContainer />
     </BrowserRouter>
   );
 }
