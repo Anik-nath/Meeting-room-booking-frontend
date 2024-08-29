@@ -2,12 +2,13 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetRoomByIdQuery } from "../Redux/Api/roomApi";
+import { useAppSelector } from "../Redux/hook";
 
 export default function RoomDetails() {
   const { id } = useParams<{ id: string }>();
   const { data: response } = useGetRoomByIdQuery(id!);
   const room = response?.data;
-
+  const user = useAppSelector(state => state.user.userData)
 
   const [selectedDate, setSelectedDate] = useState(null);
   const [availableSlots, setAvailableSlots] = useState([
@@ -16,11 +17,6 @@ export default function RoomDetails() {
     { time: "12:00 PM", isBooked: true },
   ]);
   const [selectedSlot, setSelectedSlot] = useState(null);
-
-  const user = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-  };
 
   const pricePerSlot = 500;
 

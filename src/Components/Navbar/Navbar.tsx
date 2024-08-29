@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../Redux/hook";
 import { useNavigate } from "react-router-dom";
 import { clearUser } from "../../Redux/FeatureSlice/userSlice";
 import { toast } from "react-toastify";
+import icon from "../../assets/icon.png";
 
 export default function Navbar() {
   const hideNavbarRoutes = [
@@ -17,7 +18,7 @@ export default function Navbar() {
 
   const ResultuserData = useAppSelector((state) => state.user.userData);
 
-  //  logout using Redux and local storage to store credentials
+  //  logout user
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -75,7 +76,7 @@ export default function Navbar() {
               </ul>
             </div>
             <a href="/" className="text-xl flex flex-row gap-1 items-center">
-              <img className="md:w-10 lg:w-10 w-6" src="./icon.png" alt="" />
+              <img className="md:w-10 lg:w-10 w-6" src={icon} alt={icon} />
               <span className="text-[#7ec242] font-bold lg:text-2xl md:text-2xl text-xl">
                 NexusMeet
               </span>
@@ -186,8 +187,10 @@ export default function Navbar() {
                 <li className="border-b py-2 hover:bg-gray-100 rounded-xl font-semibold">
                   <a href="/mybookings">My Bookings</a>
                 </li>
+                
                 <li className="bg-gray-100 hover:bg-primary hover:text-white rounded-xl py-2 font-semibold">
                   <button
+                  disabled={!ResultuserData?.email}
                     onClick={handleLogOut}
                     className="text-center flex flex-row gap-2"
                   >
