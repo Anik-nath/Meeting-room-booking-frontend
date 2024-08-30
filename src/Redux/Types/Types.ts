@@ -46,3 +46,29 @@ export type TRoom = {
   pricePerSlot: number;
   amenities: string[];
 };
+
+export type TSlot = {
+  _id: string;
+  room: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  isBooked: boolean;
+};
+export type TBooking = {
+  _id: string;
+  date: string;
+  slots: TSlot[];
+  room: TRoom;
+  user: string;
+  totalAmount: number;
+  isConfirmed: string;
+  isDeleted: boolean;
+};
+
+export type TBookingResponse = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: TBooking[];
+};

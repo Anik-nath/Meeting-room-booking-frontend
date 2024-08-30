@@ -23,11 +23,9 @@ export default function FeaturedRoom() {
         {/* featured rooms */}
         <div id="rooms" className="mt-12 lg:mt-20">
           <div className="grid md:grid-cols-4 lg:grid-cols-4 grid-cols-2 gap-4">
-            {
-            Allrooms?.map((room) => (
+            {Allrooms?.map((room) => (
               <RoomCard key={room._id} room={room}></RoomCard>
-            )).splice(0,4)
-            }
+            )).splice(0, 4)}
           </div>
           <div className="flex flex-row justify-center mt-12">
             <a className="btn btn-primary text-white border-0" href="/rooms">

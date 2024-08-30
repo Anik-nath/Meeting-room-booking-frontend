@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { TResponse, TResponseByID } from "../Types/Types";
+import { TBookingResponse, TResponse, TResponseByID } from "../Types/Types";
 
 export const roomApi = createApi({
   reducerPath: "roomsApi",
@@ -20,7 +20,10 @@ export const roomApi = createApi({
     getRoomById: builder.query<TResponseByID, string>({
       query: (id) => `rooms/${id}`,
     }),
+    getMyBooking:builder.query<TBookingResponse, string>({
+      query: (email) => `my-bookings?${email}`
+    })
   }),
 });
 
-export const { useGetRoomsQuery,useGetRoomByIdQuery  } = roomApi;
+export const { useGetRoomsQuery,useGetRoomByIdQuery, useGetMyBookingQuery  } = roomApi;
