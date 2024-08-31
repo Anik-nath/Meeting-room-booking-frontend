@@ -1,7 +1,39 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { TRoom } from "../Redux/Types/Types";
+import { useCreateRoomMutation } from "../Redux/Api/roomApi";
+import { roomAmenities } from "../Redux/utils/roomAmenitiesArr";
+import { DisplayErrorMessage } from "../Redux/utils/errorMessage";
+
 export default function CreateRoom() {
+  const { register, reset, handleSubmit } = useForm<TRoom>();
+  const [createRoom] = useCreateRoomMutation();
+
+  const onSubmit: SubmitHandler<TRoom> = async (formData) => {
+    const resultData = {
+      ...formData,
+      roomNo: Number(formData.roomNo),
+      floorNo: Number(formData.floorNo),
+      capacity: Number(formData.capacity),
+      pricePerSlot: Number(formData.pricePerSlot),
+    };
+    try {
+      // console.log(resultData);
+      await createRoom(resultData).unwrap();
+      reset();
+      toast.success("Room added successfully!");
+    } catch (error) {
+      const errorMessage = DisplayErrorMessage(error);
+      toast.error(errorMessage || "Failed to add room.");
+    }
+  };
   return (
     <div className="bg-gray-100 p-4 rounded-xl">
-      <form className="bg-white p-8 rounded-lg shadow-lg max-w-full mx-auto">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-white p-8 rounded-lg shadow-lg max-w-full mx-auto"
+      >
         <h2 className="text-2xl font-semibold mb-6">Add New Room</h2>
         <div className="flex md:flex-row flex-col justify-between md:gap-4">
           {/* Room Name */}
@@ -13,6 +45,7 @@ export default function CreateRoom() {
             </label>
             <input
               type="text"
+              {...register("name", { required: true })}
               name="name"
               className="input input-bordered border-gray-400 focus:outline-none  w-full"
               placeholder="Enter room name"
@@ -28,6 +61,7 @@ export default function CreateRoom() {
             </label>
             <input
               type="number"
+              {...register("roomNo", { required: true })}
               name="roomNo"
               className="input input-bordered border-gray-400 focus:outline-none w-full"
               placeholder="Enter room number"
@@ -44,6 +78,7 @@ export default function CreateRoom() {
             </label>
             <input
               type="number"
+              {...register("floorNo", { required: true })}
               name="floorNo"
               className="input input-bordered border-gray-400 focus:outline-none w-full"
               placeholder="Enter floor number"
@@ -58,6 +93,7 @@ export default function CreateRoom() {
             </label>
             <input
               type="number"
+              {...register("capacity", { required: true })}
               name="capacity"
               className="input input-bordered border-gray-400 focus:outline-none w-full"
               placeholder="Enter capacity"
@@ -72,6 +108,7 @@ export default function CreateRoom() {
             </label>
             <input
               type="number"
+              {...register("pricePerSlot", { required: true })}
               name="pricePerSlot"
               className="input input-bordered border-gray-400 focus:outline-none w-full"
               placeholder="Enter price per slot"
@@ -87,51 +124,18 @@ export default function CreateRoom() {
               </span>
             </label>
             <div className="flex flex-wrap gap-4">
-              <label className="flex items-center space-x-3">
-                <input
-                  type="checkbox"
-                  name="amenities"
-                  value="Whiteboard"
-                  className="checkbox checkbox-primary"
-                />
-                <span className="label-text">Whiteboard</span>
-              </label>
-              <label className="flex items-center space-x-3">
-                <input
-                  type="checkbox"
-                  name="amenities"
-                  value="Projector"
-                  className="checkbox checkbox-primary"
-                />
-                <span className="label-text">Projector</span>
-              </label>
-              <label className="flex items-center space-x-3">
-                <input
-                  type="checkbox"
-                  name="amenities"
-                  value="WiFi"
-                  className="checkbox checkbox-primary"
-                />
-                <span className="label-text">WiFi</span>
-              </label>
-              <label className="flex items-center space-x-3">
-                <input
-                  type="checkbox"
-                  name="amenities"
-                  value="AC"
-                  className="checkbox checkbox-primary"
-                />
-                <span className="label-text">Air Conditioning</span>
-              </label>
-              <label className="flex items-center space-x-3">
-                <input
-                  type="checkbox"
-                  name="amenities"
-                  value="TV"
-                  className="checkbox checkbox-primary"
-                />
-                <span className="label-text">TV</span>
-              </label>
+              {roomAmenities.map((index) => (
+                <label key={index} className="flex items-center space-x-3">
+                  <input
+                    type="checkbox"
+                    {...register("amenities", { required: true })}
+                    name="amenities"
+                    value={index}
+                    className="checkbox checkbox-primary"
+                  />
+                  <span className="label-text">{index}</span>
+                </label>
+              ))}
             </div>
           </div>
         </div>

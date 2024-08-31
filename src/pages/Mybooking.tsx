@@ -1,3 +1,4 @@
+import UpdateBookingModal from "../Components/Modal/UpdateBookingModal";
 import { useGetMyBookingQuery } from "../Redux/Api/roomApi";
 import { useAppSelector } from "../Redux/hook";
 
@@ -5,7 +6,15 @@ export default function Mybooking() {
   const user = useAppSelector((state) => state.user.userData);
   const { data: bookings } = useGetMyBookingQuery(user?.email ?? "");
   const mybookings = bookings?.data;
-
+  // console.log(mybookings)
+  const handleModal = () => {
+    const modal = document.getElementById(
+      "Update-booking-modal"
+    ) as HTMLDialogElement;
+    if (modal) {
+      modal.showModal();
+    }
+  };
   return (
     <div className="md:px-10 px-6 py-12 bg-primary min-h-screen">
       <div className="flex justify-between">
@@ -26,12 +35,13 @@ export default function Mybooking() {
                 <th>Meeting Time</th>
                 <th>Amount</th>
                 <th>Booking Status</th>
+                <th>Modify</th>
               </tr>
             </thead>
             <tbody>
               {mybookings?.map((booking) => (
                 <tr key={booking._id} className="border-gray-300 text-gray-700">
-                  <td>{booking._id.slice(0, 4)}</td>
+                  <td>#{booking._id.slice(0, 4)}</td>
                   <td>{booking.date}</td>
                   <td>{user?.name}</td>
                   <td>{booking.room.roomNo}</td>
@@ -39,7 +49,6 @@ export default function Mybooking() {
                     <div className="font-semibold">{booking.room.name}</div>
                   </td>
                   <td>{booking.room.floorNo}</td>
-
                   <td>
                     {booking.slots.map((slot) => (
                       <div key={slot._id} className="py-1">
@@ -61,6 +70,16 @@ export default function Mybooking() {
                       {booking.isConfirmed}
                     </div>
                   </th>
+                  <td>
+                    <button
+                      id="update-booking"
+                      className="btn-secondary"
+                      onClick={handleModal}
+                    >
+                      Update
+                    </button>
+                    <UpdateBookingModal />
+                  </td>
                 </tr>
               ))}
             </tbody>

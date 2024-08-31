@@ -1,0 +1,20 @@
+export const roomAmenities = [
+  "Wi-Fi",
+  "Projector",
+  "Whiteboard",
+  "Conference Phone",
+  "Air Conditioning",
+  "Ergonomic Chairs",
+  "HDMI & VGA Connections",
+  "Catering Service",
+  "Complimentary Coffee & Tea",
+  "Soundproof Walls",
+  "Printer/Scanner Access",
+  "24/7 Access",
+  "Conferencing Equipment",
+  "Smart TV",
+  "Dedicated IT Support",
+  "Adjustable Lighting",
+  "Water Dispenser",
+];
+

@@ -1,85 +1,84 @@
+import { Pencil, Trash2 } from "lucide-react";
+import { useGetslotsQuery } from "../Redux/Api/roomApi";
+import { TSlot } from "../Redux/Types/Types";
+
+type GroupedSlot = {
+  room: string;
+  date: string;
+  slots: TSlot[];
+};
+
+type GroupedSlots = {
+  [key: string]: GroupedSlot;
+};
+
 export default function SlotList() {
+  const { data } = useGetslotsQuery();
+  const AllSlots = data?.data;
+  console.log(AllSlots)
+
+  const groupedSlots = AllSlots?.reduce((acc: GroupedSlots, slot: TSlot) => {
+    const key = `${slot.room}-${slot.date}`;
+    if (!acc[key]) {
+      acc[key] = {
+        room: slot.room,
+        date: slot.date,
+        slots: [],
+      };
+    }
+    acc[key].slots.push(slot);
+    return acc;
+  }, {});
+
+  const groupedSlotsArray = Object.values(groupedSlots || {});
+
   return (
     <div className="bg-gray-100 p-4 rounded-xl">
       <h1 className="text-2xl font-semibold mb-6">Slot List</h1>
       {/* Slot list */}
       <div className="overflow-x-auto bg-white mt-8 rounded-xl">
         <table className="table w-full">
-          <thead>
+          <thead className="">
             <tr className="border-primary">
               <th>Room Name</th>
               <th>Room No.</th>
               <th>Date</th>
-              <th>Start Time</th>
-              <th>End Time</th>
-              <th>Actions</th>
+              <th>Time Slots</th>
+              <th>Update</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-            {/* Example Slot Entry */}
-            <tr className="border-gray-300 text-gray-700">
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle h-12 w-12">
-                      <img
-                        src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                        alt="Room Avatar"
-                      />
+            {groupedSlotsArray?.map((group, index) => (
+              <tr key={index} className="border-gray-300 text-gray-700">
+                <td>
+                  <div className="font-semibold">{group.room}</div>
+                </td>
+                <td>{group.room}</td>
+                <td>{group.date}</td>
+                <td>
+                  {group.slots.map((slot, idx) => (
+                    <div
+                      key={idx}
+                      className="border rounded-full mb-1 text-center bg-gray-100"
+                    >
+                      <span>{slot.startTime}</span> -{" "}
+                      <span>{slot.endTime}</span>
                     </div>
-                  </div>
-                  <div>
-                    <div className="font-semibold">Room A</div>
-                  </div>
-                </div>
-              </td>
-              <td>#104</td>
-              <td>2024-09-10</td>
-              <td>09:00 AM</td>
-              <td>10:00 AM</td>
-              <td>
-                <div className="flex gap-4">
-                  <button className="btn text-white btn-primary btn-sm">
-                    Update
+                  ))}
+                </td>
+                <td>
+                  <button className="bg-primary text-white btn-sm rounded">
+                    <Pencil className="h-5 w-5" />
                   </button>
-                  <button className="btn text-white btn-error btn-sm  rounded-full">
-                    Delete
+                </td>
+                <td>
+                  <button className="bg-red-500 text-white btn-sm rounded">
+                    <Trash2 className="h-5 w-5" />
                   </button>
-                </div>
-              </td>
-            </tr>
-            {/* Another Example Slot Entry */}
-            <tr className="border-gray-300 text-gray-700">
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle h-12 w-12">
-                      <img
-                        src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                        alt="Room Avatar"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-semibold">Room B</div>
-                  </div>
-                </div>
-              </td>
-              <td>#105</td>
-              <td>2024-09-11</td>
-              <td>02:00 PM</td>
-              <td>03:00 PM</td>
-              <td>
-                <div className="flex gap-4">
-                  <button className="btn text-white btn-primary btn-sm">
-                    Update
-                  </button>
-                  <button className="btn text-white btn-error btn-sm rounded-full">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

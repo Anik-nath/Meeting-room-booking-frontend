@@ -38,7 +38,7 @@ export type TResponseByID = {
 };
 
 export type TRoom = {
-  _id:string;
+  _id: string | undefined;
   name: string;
   roomNo: number;
   floorNo: number;
@@ -47,6 +47,18 @@ export type TRoom = {
   amenities: string[];
 };
 
+export type TSlotResponse = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: TSlot[];
+};
+export type TcreateSlot = {
+  room: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+};
 export type TSlot = {
   _id: string;
   room: string;
@@ -60,7 +72,7 @@ export type TBooking = {
   date: string;
   slots: TSlot[];
   room: TRoom;
-  user: string;
+  user: TuserData;
   totalAmount: number;
   isConfirmed: string;
   isDeleted: boolean;
