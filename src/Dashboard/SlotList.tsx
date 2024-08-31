@@ -1,21 +1,11 @@
 import { Pencil, Trash2 } from "lucide-react";
 import { useGetslotsQuery } from "../Redux/Api/roomApi";
-import { TSlot } from "../Redux/Types/Types";
-
-type GroupedSlot = {
-  room: string;
-  date: string;
-  slots: TSlot[];
-};
-
-type GroupedSlots = {
-  [key: string]: GroupedSlot;
-};
+import { GroupedSlots, TSlot } from "../Redux/Types/Types";
 
 export default function SlotList() {
   const { data } = useGetslotsQuery();
   const AllSlots = data?.data;
-  console.log(AllSlots)
+  // console.log(AllSlots);
 
   const groupedSlots = AllSlots?.reduce((acc: GroupedSlots, slot: TSlot) => {
     const key = `${slot.room}-${slot.date}`;

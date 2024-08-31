@@ -40,28 +40,43 @@ export default function Footer() {
             </nav>
             <nav>
               <h6 className="footer-title text-primary opacity-100">Company</h6>
-              <a className="link link-hover py-2 text-gray-700 font-semibold">
+              <a
+                href="/about-us"
+                className="link link-hover py-2 text-gray-700 font-semibold"
+              >
                 About us
               </a>
-              <a className="link link-hover  text-gray-700 font-semibold">
+              <a
+                href="/contact-us"
+                className="link link-hover  text-gray-700 font-semibold"
+              >
                 Contact
               </a>
-              <a className="link link-hover py-2 text-gray-700 font-semibold">
-                Jobs
-              </a>
-              <a className="link link-hover text-gray-700 font-semibold">
-                Press kit
+              <a
+                href="/rooms"
+                className="link link-hover py-2 text-gray-700 font-semibold"
+              >
+                Meeting rooms
               </a>
             </nav>
             <nav>
               <h6 className="footer-title text-primary opacity-100">Legal</h6>
-              <a href="/Terms-of-use" className="link link-hover py-2 text-gray-700 font-semibold">
+              <a
+                href="/Terms-of-use"
+                className="link link-hover py-2 text-gray-700 font-semibold"
+              >
                 Terms of use
               </a>
-              <a href="/privacy-policiy" className="link link-hover text-gray-700 font-semibold">
+              <a
+                href="/privacy-policiy"
+                className="link link-hover text-gray-700 font-semibold"
+              >
                 Privacy policy
               </a>
-              <a href="/cookie-policiy" className="link link-hover py-2 text-gray-700 font-semibold">
+              <a
+                href="/cookie-policiy"
+                className="link link-hover py-2 text-gray-700 font-semibold"
+              >
                 Cookie policy
               </a>
             </nav>

@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
+  TAvailableSlotsParams,
+  TAvailableSlotsResponse,
   TBookingResponse,
   TResponse,
   TResponseByID,
@@ -26,6 +28,13 @@ export const roomApi = createApi({
     getslots: builder.query<TSlotResponse, void>({
       query: () => "slots",
     }),
+    getAvailAbleslots: builder.query<
+      TAvailableSlotsResponse,
+      TAvailableSlotsParams
+    >({
+      query: ({ date, roomId }) =>
+        `slots/availability?date=${date}&roomId=${roomId}`,
+    }),
     getAllbookings: builder.query<TBookingResponse, void>({
       query: () => "bookings",
     }),
@@ -50,6 +59,13 @@ export const roomApi = createApi({
         body: newSlot,
       }),
     }),
+    createBooking: builder.mutation({
+      query: (newBooking) => ({
+        url: "bookings",
+        method: "POST",
+        body: newBooking,
+      }),
+    }),
   }),
 });
 
@@ -61,4 +77,6 @@ export const {
   useGetAllbookingsQuery,
   useCreateSlotsMutation,
   useCreateRoomMutation,
+  useGetAvailAbleslotsQuery,
+  useCreateBookingMutation,
 } = roomApi;

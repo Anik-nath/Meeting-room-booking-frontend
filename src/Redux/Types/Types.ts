@@ -84,3 +84,42 @@ export type TBookingResponse = {
   message: string;
   data: TBooking[];
 };
+
+export type TGroupedSlot = {
+  room: string;
+  date: string;
+  slots: TSlot[];
+};
+
+export type GroupedSlots = {
+  [key: string]: TGroupedSlot;
+};
+
+export type TAvailableSlotsParams = {
+  date: string;
+  roomId: string;
+};
+export type TAvailableSlotsResponse = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: TSlot[];
+};
+
+export type TslotSummary = {
+  _id: string;
+  startTime: string;
+  endTime: string;
+};
+export type TCheckout = {
+  date: string;
+  user: string;
+  room: string;
+  slots: string[];
+};
+
+export type TConfirmModal = {
+  isOpen: boolean;
+  onClose: (confirm: boolean) => void;
+  onConfirm: (confirm: boolean) => void;
+};

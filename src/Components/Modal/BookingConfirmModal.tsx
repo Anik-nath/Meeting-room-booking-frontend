@@ -1,55 +1,34 @@
-import { useNavigate } from "react-router-dom";
+import { TConfirmModal } from "../../Redux/Types/Types";
 
-type TConfirmData = {
-  user: {
-    name: string;
-  };
-  date: string;
-  time: string;
-  totalCost: string;
-};
+function BookingConfirmModal({ isOpen, onClose, onConfirm }: TConfirmModal) {
+  if (!isOpen) return null;
 
-type TBookingConfirmModal = {
-  confirmData: TConfirmData;
-};
-
-export default function BookingConfirmModal({
-  confirmData,
-}: TBookingConfirmModal) {
-  const navigate = useNavigate();
-  const handleCloseModal = () => {
-    const modal = document.getElementById(
-      "confirmation-modal"
-    ) as HTMLDialogElement;
-    if (modal) {
-      modal.close();
-    }
-    navigate("/mybookings");
-  };
   return (
-    <>
-      <dialog id="confirmation-modal" className="modal modal-middle">
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+      <div className="modal modal-open">
         <div className="modal-box">
-          <h3 className="font-bold text-lg text-primary">Booking Confirmed!</h3>
-          <p className="py-4">
-            Thank you,{" "}
-            <span className="font-semibold">{confirmData.user.name}</span>. Your
-            booking for{" "}
-            <span className="font-semibold">{confirmData.date}</span> at{" "}
-            <span className="font-semibold">{confirmData.time}</span> has been
-            confirmed. The total cost is $
-            <span className="font-semibold">{confirmData.totalCost}</span>.
-          </p>
-          <div className="modal-action">
+          <h2 className="text-lg font-semibold mb-4">
+            Are you sure to confirm your booking?
+          </h2>
+          <div className="flex justify-end">
             <button
-              className="btn-primary text-white"
-              onClick={handleCloseModal}
+              className="btn btn-secondary mr-2"
+              onClick={() => onClose(false)}
             >
-              Close
+              Cancel
+            </button>
+            <button
+              className="btn btn-primary text-white"
+              onClick={() => onConfirm(true)}
+            >
+              Submit
             </button>
           </div>
         </div>
-      </dialog>
-    </>
+        <div className="modal-backdrop" onClick={() => onClose(false)}></div>
+      </div>
+    </div>
   );
 }
+
+export default BookingConfirmModal;

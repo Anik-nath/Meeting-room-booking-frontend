@@ -1,34 +1,62 @@
-import { useLocation } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useLocation, useNavigate } from "react-router-dom";
+import { TCheckout } from "../Redux/Types/Types";
+import { useCreateBookingMutation } from "../Redux/Api/roomApi";
+import { toast } from "react-toastify";
+import { DisplayErrorMessage } from "../Redux/utils/errorMessage";
 import { useState } from "react";
 import BookingConfirmModal from "../Components/Modal/BookingConfirmModal";
 
 export default function Checkout() {
+  const navigate = useNavigate();
   const location = useLocation();
+  const { date, user, totalCost, roomID, room, slotId, slots } =
+    location.state || {};
+  // console.log(slotId);
+  const { register, handleSubmit, reset } = useForm<TCheckout>({
+    defaultValues: {
+      slots: slotId,
+    },
+  });
 
-  const { date, time, user, totalCost } = location.state || {};
-  const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
+  // console.log(slots);
+  const [createRoom] = useCreateBookingMutation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formDataToSubmit, setFormDataToSubmit] = useState<TCheckout | null>(
+    null
+  );
 
-  const handleConfirmBooking = () => {
-    setIsBookingConfirmed(true);
-    const modal = document.getElementById(
-      "confirmation-modal"
-    ) as HTMLDialogElement;
-    if (modal) {
-      modal.showModal();
+  const onSubmit: SubmitHandler<TCheckout> = (formData) => {
+    setFormDataToSubmit(formData);
+    setIsModalOpen(true);
+  };
+
+  const handleConfirm = async (confirm: boolean) => {
+    setIsModalOpen(false);
+    if (confirm && formDataToSubmit) {
+      try {
+        const finalData = {
+          ...formDataToSubmit,
+          slots: formDataToSubmit.slots || [],
+        };
+        console.log(finalData);
+        await createRoom(finalData).unwrap();
+        reset();
+        toast.success("Booking successfully!");
+        navigate("/mybookings");
+      } catch (error) {
+        console.log(error);
+        const errorMessage = DisplayErrorMessage(error);
+        toast.error(errorMessage || "Failed to book.");
+      }
     }
   };
-
-  const confirmData = {
-    date,
-    time,
-    user,
-    totalCost,
-  };
-
   return (
     <div className="bg-primary dark:bg-gray-900">
       <div id="checkout-card-wrapper" className="w-full max-w-3xl mx-auto p-8">
-        <div
+        <form
+          onSubmit={handleSubmit(onSubmit)}
           id="checkout-card"
           className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border dark:border-gray-700"
         >
@@ -51,22 +79,38 @@ export default function Checkout() {
                 <input
                   type="text"
                   id="name"
-                  value={user.name}
+                  value={user?.name}
+                  name="name"
                   className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
                   readOnly
+                />
+                {/* hidden */}
+                <input
+                  id="user"
+                  type="hidden"
+                  {...register("user", { required: true })}
+                  value={user?._id}
                 />
               </div>
               <div>
                 <label
-                  htmlFor="email"
+                  htmlFor="room"
                   className="block text-gray-700 dark:text-white mb-1"
                 >
-                  Email
+                  Room
                 </label>
                 <input
-                  type="email"
-                  id="email"
-                  value={user.email}
+                  type="hidden"
+                  id="room"
+                  {...register("room", { required: true })}
+                  value={roomID}
+                  className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                  readOnly
+                />
+                <input
+                  type="text"
+                  id="room"
+                  value={room.name}
                   className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
                   readOnly
                 />
@@ -82,6 +126,7 @@ export default function Checkout() {
                 </label>
                 <input
                   type="date"
+                  {...register("date", { required: true })}
                   value={date}
                   id="date"
                   className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
@@ -90,18 +135,35 @@ export default function Checkout() {
               </div>
               <div>
                 <label
-                  htmlFor="time"
+                  htmlFor="slots"
                   className="block text-gray-700 dark:text-white mb-1"
                 >
-                  Meeting Time
+                  Slots
                 </label>
-                <input
-                  type="text"
-                  value={time}
-                  id="time"
-                  className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
-                  readOnly
-                />
+                <div>
+                  {slotId.map((slot: string, index: number) => {
+                    const slotData = slots.find((s: any) => s._id === slot);
+                    return (
+                      <div key={index} className="mb-4">
+                        <label
+                          htmlFor={`slots.${index}`}
+                          className="block text-gray-700 dark:text-white mb-1 border rounded-md "
+                        >
+                          {slotData?.startTime} - {slotData?.endTime}
+                        </label>
+                        <input
+                          type="hidden"
+                          {...register(`slots.${index}` as const, {
+                            required: true,
+                          })}
+                          value={slot}
+                          className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                          readOnly
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
@@ -168,20 +230,17 @@ export default function Checkout() {
           </div>
           {/* confirm button */}
           <div id="confirm-button" className="mt-8 flex justify-end">
-            <button
-              className="btn btn-primary text-white"
-              onClick={handleConfirmBooking}
-            >
+            <button type="submit" className="btn btn-primary text-white">
               Confirm Booking
             </button>
           </div>
-        </div>
+        </form>
       </div>
-
-      {/* Confirmation Modal */}
-      {isBookingConfirmed && (
-        <BookingConfirmModal confirmData={confirmData}></BookingConfirmModal>
-      )}
+      <BookingConfirmModal
+        isOpen={isModalOpen}
+        onClose={(confirm) => handleConfirm(confirm)}
+        onConfirm={() => handleConfirm(true)}
+      />
     </div>
   );
 }
