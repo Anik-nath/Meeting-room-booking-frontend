@@ -26,6 +26,9 @@ import { setUser } from "./Redux/FeatureSlice/userSlice";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
+import TermsOfUse from "./pages/TermsOfUse";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import CookiePolicy from "./pages/CookiePolicy";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -71,6 +74,9 @@ function App() {
             ></Route>
           </Route>
         </Route>
+        <Route path="/Terms-of-use" element={<TermsOfUse />}></Route>
+        <Route path="/privacy-policiy" element={<PrivacyPolicy />}></Route>
+        <Route path="/cookie-policiy" element={<CookiePolicy />}></Route>
         <Route path="*" element={<ErrorPage />}></Route>
       </Routes>
       <ScrollToTop viewBox="0 0 160 256" smooth color="#7ec242" />

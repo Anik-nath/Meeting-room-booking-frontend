@@ -22,19 +22,19 @@ export default function Footer() {
               <p className="flex flex-row gap-1 items-center py-2 text-gray-700">
                 <span>
                   <MailIcon className="text-primary w-5 h-5"></MailIcon>
-                </span>{" "}
+                </span>
                 Email: nexusmeet@gmail.com
               </p>
               <p className="flex flex-row gap-1 items-center text-gray-700">
                 <span>
                   <Phone className="text-primary w-5 h-5"></Phone>
-                </span>{" "}
+                </span>
                 Phone: 01333387694
               </p>
               <p className="flex flex-row gap-1 items-center py-2 text-gray-700">
                 <span>
                   <Home className="text-primary w-5 h-5"></Home>
-                </span>{" "}
+                </span>
                 Office: WT 275 Road, ABCD Tower, Chittagong, Bangladesh
               </p>
             </nav>
@@ -55,13 +55,13 @@ export default function Footer() {
             </nav>
             <nav>
               <h6 className="footer-title text-primary opacity-100">Legal</h6>
-              <a className="link link-hover py-2 text-gray-700 font-semibold">
+              <a href="/Terms-of-use" className="link link-hover py-2 text-gray-700 font-semibold">
                 Terms of use
               </a>
-              <a className="link link-hover text-gray-700 font-semibold">
+              <a href="/privacy-policiy" className="link link-hover text-gray-700 font-semibold">
                 Privacy policy
               </a>
-              <a className="link link-hover py-2 text-gray-700 font-semibold">
+              <a href="/cookie-policiy" className="link link-hover py-2 text-gray-700 font-semibold">
                 Cookie policy
               </a>
             </nav>
