@@ -9,6 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import { User } from "lucide-react";
+import { useGetRoomsQuery } from "../Redux/Api/roomApi";
 
 // Register Chart.js components
 ChartJS.register(
@@ -21,11 +22,11 @@ ChartJS.register(
 );
 
 const chartData = {
-  labels: ["2016", "2017", "2018", "2019", "2020"], 
+  labels: ["2016", "2017", "2018", "2019", "2020"],
   datasets: [
     {
-      label: "Users Gained", 
-      data: [500, 1000, 1500, 2000, 2500], 
+      label: "Users Gained",
+      data: [500, 1000, 1500, 2000, 2500],
       backgroundColor: [
         "rgba(75, 192, 192, 0.6)",
         "rgba(54, 162, 235, 0.6)",
@@ -46,6 +47,9 @@ const chartData = {
 };
 
 export default function DashboardHome() {
+  const { data } = useGetRoomsQuery();
+  const Allrooms = data?.data.filter((item) => item.isDeleted === false);
+
   return (
     <div className="bg-gray-100 p-4 rounded-xl">
       <div className="grid md:grid-cols-4 grid-cols-2 gap-4 mb-8">
@@ -54,7 +58,16 @@ export default function DashboardHome() {
             <span>
               <User />
             </span>
-            Total
+            Total rooms
+          </h2>
+          <p className="text-white text-lg">{Allrooms?.length}</p>
+        </div>
+        <div className="bg-primary bg-opacity-85 text-center py-10 p-2 rounded-md">
+          <h2 className="text-white text-xl font-semibold flex justify-center items-center">
+            <span>
+              <User />
+            </span>
+            Total Bookings
           </h2>
           <p className="text-white text-lg">770K</p>
         </div>
@@ -63,7 +76,7 @@ export default function DashboardHome() {
             <span>
               <User />
             </span>
-            Total
+            Total User
           </h2>
           <p className="text-white text-lg">770K</p>
         </div>
@@ -72,16 +85,7 @@ export default function DashboardHome() {
             <span>
               <User />
             </span>
-            Total
-          </h2>
-          <p className="text-white text-lg">770K</p>
-        </div>
-        <div className="bg-primary bg-opacity-85 text-center py-10 p-2 rounded-md">
-          <h2 className="text-white text-xl font-semibold flex justify-center items-center">
-            <span>
-              <User />
-            </span>
-            Total
+            Total Slots
           </h2>
           <p className="text-white text-lg">770K</p>
         </div>
@@ -101,13 +105,11 @@ export default function DashboardHome() {
               },
             },
             responsive: true,
-            maintainAspectRatio: false, 
+            maintainAspectRatio: false,
           }}
         />
       </div>
-      <div>
-        
-      </div>
+      <div></div>
     </div>
   );
 }
