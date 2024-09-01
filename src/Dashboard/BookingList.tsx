@@ -1,15 +1,50 @@
-import { Pencil, Trash2 } from "lucide-react";
-import { useGetAllbookingsQuery } from "../Redux/Api/roomApi";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { CheckCircle, Trash2, XCircle } from "lucide-react";
+import {
+  useBookingStatusMutation,
+  useGetAllbookingsQuery,
+} from "../Redux/Api/roomApi";
+import { toast } from "react-toastify";
 
 export default function BookingList() {
-  const { data: bookings } = useGetAllbookingsQuery();
-  const allBookings = bookings?.data;
-  console.log(allBookings);
+  const { data: bookings, refetch } = useGetAllbookingsQuery();
+  const allBookings = bookings?.data.filter((item) => item.isDeleted === false);
+  // console.log(allBookings);
+  const [updateBooking] = useBookingStatusMutation();
+  const handleAcceptBooking = async (id: string) => {
+    try {
+      await updateBooking({ id, isConfirmed: "confirmed" }).unwrap();
+      toast.success("Booking accepted successfully!");
+      refetch();
+    } catch (error) {
+      console.log(id);
+      toast.error("Failed to accept booking.");
+    }
+  };
 
+  const handleRejectBooking = async (id: string) => {
+    try {
+      await updateBooking({ id, isConfirmed: "unconfirmed" }).unwrap();
+      toast.success("Booking Unconfirmed!");
+      refetch();
+    } catch (error) {
+      toast.error("Failed to Unconfirmed booking.");
+    }
+  };
+
+  const handleDeleteBooking = async (id: string) => {
+    try {
+      await updateBooking({ id, isDeleted: true }).unwrap();
+      toast.success("Successfully Delete Booking!");
+      refetch();
+    } catch (error) {
+      toast.error("Failed to Delete Booking.");
+    }
+  };
   return (
     <div className="bg-gray-100 p-4 rounded-xl">
       <h1 className="text-2xl">Booking List</h1>
-      {/* booking list */}
+      {/* Booking list */}
       <div>
         <div className="overflow-x-auto bg-white mt-8 rounded-xl">
           <table className="table">
@@ -23,8 +58,7 @@ export default function BookingList() {
                 <th>Meeting Time</th>
                 <th>Amount</th>
                 <th>Booking Status</th>
-                <th>Update</th>
-                <th>Delete</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -47,24 +81,39 @@ export default function BookingList() {
                     ))}
                   </td>
                   <td>${booking?.totalAmount}</td>
-                  <th>
+                  <td>
                     <div
-                      className={`badge ${
+                      className={`badge capitalize ${
                         booking.isConfirmed === "confirmed"
                           ? "badge-primary"
-                          : "badge-error"
+                          : booking.isConfirmed === "unconfirmed"
+                          ? "badge-error"
+                          : "badge-warning"
                       } badge-outline font-normal`}
                     >
                       {booking.isConfirmed}
                     </div>
-                  </th>
-                  <td>
-                    <button className="bg-primary text-white btn-sm rounded">
-                      <Pencil className="h-5 w-5" />
-                    </button>
                   </td>
-                  <td>
-                    <button className="bg-red-500 text-white btn-sm rounded">
+                  <td className="flex flex-col items-center justify-center gap-2">
+                    <button
+                      data-tip="Confirm"
+                      className="bg-primary tooltip tooltip-primary text-white btn-sm rounded"
+                      onClick={() => handleAcceptBooking(booking._id)}
+                    >
+                      <CheckCircle className="h-5 w-5 text-white" />
+                    </button>
+                    <button
+                      data-tip="Unconfirm"
+                      className="bg-gray-500 tooltip tooltip-primary text-white btn-sm rounded"
+                      onClick={() => handleRejectBooking(booking._id)}
+                    >
+                      <XCircle className="h-5 w-5" />
+                    </button>
+                    <button
+                      data-tip="Delete"
+                      className="bg-red-500 tooltip tooltip-primary text-white btn-sm rounded"
+                      onClick={() => handleDeleteBooking(booking._id)}
+                    >
                       <Trash2 className="h-5 w-5" />
                     </button>
                   </td>

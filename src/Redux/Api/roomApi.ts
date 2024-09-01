@@ -66,6 +66,22 @@ export const roomApi = createApi({
         body: newBooking,
       }),
     }),
+    // update
+    bookingStatus: builder.mutation({
+      query: ({ id, isConfirmed }) => ({
+        url: `/bookings/${id}`,
+        method: "PUT",
+        body: { isConfirmed },
+      }),
+    }),
+    // update
+    bookingDelete: builder.mutation({
+      query: ({ id, isDeleted }) => ({
+        url: `/bookings/${id}`,
+        method: "Delete",
+        body: { isDeleted },
+      }),
+    }),
   }),
 });
 
@@ -79,4 +95,5 @@ export const {
   useCreateRoomMutation,
   useGetAvailAbleslotsQuery,
   useCreateBookingMutation,
+  useBookingStatusMutation
 } = roomApi;
