@@ -4,10 +4,12 @@ import { useCreateSlotsMutation, useGetRoomsQuery } from "../Redux/Api/roomApi";
 import { toast } from "react-toastify";
 import { TcreateSlot } from "../Redux/Types/Types";
 import { DisplayErrorMessage } from "../Redux/utils/errorMessage";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateSlot() {
+  const navigate = useNavigate();
   const { data } = useGetRoomsQuery();
-  const Allrooms = data?.data;
+  const Allrooms = data?.data.filter((item) => item.isDeleted === false);
   const { register, handleSubmit, reset } = useForm<TcreateSlot>();
   const [createSlot] = useCreateSlotsMutation();
 
@@ -16,6 +18,7 @@ export default function CreateSlot() {
       await createSlot(formData).unwrap();
       reset();
       toast.success("Slot added successfully!");
+      navigate("/dashboard/slot-list");
     } catch (error) {
       const errorMessage = DisplayErrorMessage(error);
       toast.error(errorMessage || "Failed to add slot");

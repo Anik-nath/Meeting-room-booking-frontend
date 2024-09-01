@@ -45,6 +45,7 @@ export type TRoom = {
   capacity: number;
   pricePerSlot: number;
   amenities: string[];
+  isDeleted:boolean;
 };
 
 export type TSlotResponse = {
@@ -66,6 +67,7 @@ export type TSlot = {
   startTime: string;
   endTime: string;
   isBooked: boolean;
+  isDeleted: boolean;
 };
 export type TBooking = {
   _id: string;

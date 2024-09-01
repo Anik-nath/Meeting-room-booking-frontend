@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Pencil, Trash2 } from "lucide-react";
-import { useGetslotsQuery } from "../Redux/Api/roomApi";
+import { useDeleteSlotsMutation, useGetslotsQuery } from "../Redux/Api/roomApi";
 import { GroupedSlots, TSlot } from "../Redux/Types/Types";
+import { toast } from "react-toastify";
 
 export default function SlotList() {
-  const { data } = useGetslotsQuery();
-  const AllSlots = data?.data;
-  // console.log(AllSlots);
+  const { data, refetch } = useGetslotsQuery();
+  const AllSlots = data?.data.filter((item) => item.isDeleted === false);
+  console.log(AllSlots);
 
   const groupedSlots = AllSlots?.reduce((acc: GroupedSlots, slot: TSlot) => {
     const key = `${slot.room}-${slot.date}`;
@@ -19,8 +21,19 @@ export default function SlotList() {
     acc[key].slots.push(slot);
     return acc;
   }, {});
-
   const groupedSlotsArray = Object.values(groupedSlots || {});
+
+  const [deleteSlots] = useDeleteSlotsMutation();
+  const handleDeleteSlot = async (id: string | undefined) => {
+    try {
+      // console.log(id)
+      await deleteSlots({ id, isDeleted: true }).unwrap();
+      toast.success("Delete Room Successfully!");
+      refetch();
+    } catch (error) {
+      toast.error("Failed to Delete Room.");
+    }
+  };
 
   return (
     <div className="bg-gray-100 p-4 rounded-xl">
@@ -58,12 +71,19 @@ export default function SlotList() {
                   ))}
                 </td>
                 <td>
-                  <button className="bg-primary text-white btn-sm rounded">
+                  <button
+                    data-tip="Click to Edit"
+                    className="bg-primary tooltip tooltip-primary text-white btn-sm rounded"
+                  >
                     <Pencil className="h-5 w-5" />
                   </button>
                 </td>
                 <td>
-                  <button className="bg-red-500 text-white btn-sm rounded">
+                  <button
+                    onClick={() => handleDeleteSlot(group.room)}
+                    data-tip="Click to Remove"
+                    className="bg-red-500 tooltip tooltip-error text-white btn-sm rounded"
+                  >
                     <Trash2 className="h-5 w-5" />
                   </button>
                 </td>

@@ -5,8 +5,10 @@ import { TRoom } from "../Redux/Types/Types";
 import { useCreateRoomMutation } from "../Redux/Api/roomApi";
 import { roomAmenities } from "../Redux/utils/roomAmenitiesArr";
 import { DisplayErrorMessage } from "../Redux/utils/errorMessage";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateRoom() {
+  const navigate = useNavigate();
   const { register, reset, handleSubmit } = useForm<TRoom>();
   const [createRoom] = useCreateRoomMutation();
 
@@ -23,6 +25,7 @@ export default function CreateRoom() {
       await createRoom(resultData).unwrap();
       reset();
       toast.success("Room added successfully!");
+      navigate("/dashboard/room-list");
     } catch (error) {
       const errorMessage = DisplayErrorMessage(error);
       toast.error(errorMessage || "Failed to add room.");

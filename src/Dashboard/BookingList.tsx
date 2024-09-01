@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CheckCircle, Trash2, XCircle } from "lucide-react";
 import {
+  useDeleteBookingMutation,
   useBookingStatusMutation,
   useGetAllbookingsQuery,
 } from "../Redux/Api/roomApi";
@@ -11,6 +12,7 @@ export default function BookingList() {
   const allBookings = bookings?.data.filter((item) => item.isDeleted === false);
   // console.log(allBookings);
   const [updateBooking] = useBookingStatusMutation();
+  const [deleteBooking] = useDeleteBookingMutation();
   const handleAcceptBooking = async (id: string) => {
     try {
       await updateBooking({ id, isConfirmed: "confirmed" }).unwrap();
@@ -21,7 +23,6 @@ export default function BookingList() {
       toast.error("Failed to accept booking.");
     }
   };
-
   const handleRejectBooking = async (id: string) => {
     try {
       await updateBooking({ id, isConfirmed: "unconfirmed" }).unwrap();
@@ -31,16 +32,17 @@ export default function BookingList() {
       toast.error("Failed to Unconfirmed booking.");
     }
   };
-
   const handleDeleteBooking = async (id: string) => {
     try {
-      await updateBooking({ id, isDeleted: true }).unwrap();
-      toast.success("Successfully Delete Booking!");
+      await deleteBooking({ id, isDeleted: true }).unwrap();
+      toast.success("Delete Booking Successfully!");
       refetch();
     } catch (error) {
       toast.error("Failed to Delete Booking.");
     }
   };
+
+  
   return (
     <div className="bg-gray-100 p-4 rounded-xl">
       <h1 className="text-2xl">Booking List</h1>
@@ -97,21 +99,21 @@ export default function BookingList() {
                   <td className="flex flex-col items-center justify-center gap-2">
                     <button
                       data-tip="Confirm"
-                      className="bg-primary tooltip tooltip-primary text-white btn-sm rounded"
+                      className="bg-primary tooltip tooltip-primary tooltip-left text-white btn-sm rounded"
                       onClick={() => handleAcceptBooking(booking._id)}
                     >
                       <CheckCircle className="h-5 w-5 text-white" />
                     </button>
                     <button
                       data-tip="Unconfirm"
-                      className="bg-gray-500 tooltip tooltip-primary text-white btn-sm rounded"
+                      className="bg-primary tooltip tooltip-primary tooltip-left text-white btn-sm rounded"
                       onClick={() => handleRejectBooking(booking._id)}
                     >
                       <XCircle className="h-5 w-5" />
                     </button>
                     <button
                       data-tip="Delete"
-                      className="bg-red-500 tooltip tooltip-primary text-white btn-sm rounded"
+                      className="bg-red-500 tooltip tooltip-error tooltip-left text-white btn-sm rounded"
                       onClick={() => handleDeleteBooking(booking._id)}
                     >
                       <Trash2 className="h-5 w-5" />

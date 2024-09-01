@@ -5,6 +5,8 @@ import {
   TBookingResponse,
   TResponse,
   TResponseByID,
+  TRoom,
+  TSlot,
   TSlotResponse,
 } from "../Types/Types";
 
@@ -66,7 +68,7 @@ export const roomApi = createApi({
         body: newBooking,
       }),
     }),
-    // update
+    // update booking
     bookingStatus: builder.mutation({
       query: ({ id, isConfirmed }) => ({
         url: `/bookings/${id}`,
@@ -74,10 +76,46 @@ export const roomApi = createApi({
         body: { isConfirmed },
       }),
     }),
-    // update
-    bookingDelete: builder.mutation({
+    // update room
+    roomUpdate: builder.mutation<
+      TRoom,
+      { id: string | undefined; payload: Partial<TRoom> }
+    >({
+      query: ({ id, payload }) => ({
+        url: `rooms/${id}`,
+        method: "PUT",
+        body: payload,
+      }),
+    }),
+    // update slot
+    slotUpdate: builder.mutation<
+      TRoom,
+      { id: string | undefined; payload: Partial<TSlot> }
+    >({
+      query: ({ id, payload }) => ({
+        url: `slots/${id}`,
+        method: "PUT",
+        body: payload,
+      }),
+    }),
+    // delete
+    deleteBooking: builder.mutation({
       query: ({ id, isDeleted }) => ({
         url: `/bookings/${id}`,
+        method: "Delete",
+        body: { isDeleted },
+      }),
+    }),
+    deleteRooms: builder.mutation({
+      query: ({ id, isDeleted }) => ({
+        url: `/rooms/${id}`,
+        method: "Delete",
+        body: { isDeleted },
+      }),
+    }),
+    deleteSlots: builder.mutation({
+      query: ({ id, isDeleted }) => ({
+        url: `/slots/${id}`,
         method: "Delete",
         body: { isDeleted },
       }),
@@ -95,5 +133,10 @@ export const {
   useCreateRoomMutation,
   useGetAvailAbleslotsQuery,
   useCreateBookingMutation,
-  useBookingStatusMutation
+  useBookingStatusMutation,
+  useDeleteBookingMutation,
+  useDeleteRoomsMutation,
+  useDeleteSlotsMutation,
+  useRoomUpdateMutation,
+  useSlotUpdateMutation,
 } = roomApi;
