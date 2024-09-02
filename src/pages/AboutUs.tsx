@@ -89,7 +89,7 @@ export default function AboutUs() {
         ref={missionRef}
         className="text-center md:px-10 px-6 py-12"
       >
-        <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-10 text-center">
+        <h2 className="text-3xl md:text-3xl font-bold text-gray-800 mb-10 text-center">
           Our Mission
         </h2>
         <p className="text-gray-800 text-lg text-justify ">
@@ -103,7 +103,7 @@ export default function AboutUs() {
         </p>
       </section>
       <section id="team" className="team bg-primary md:px-10 px-6 py-8 ">
-        <h2 className="text-3xl md:text-5xl font-bold text-secondary mb-10 text-center">
+        <h2 className="text-3xl md:text-3xl font-bold text-secondary mb-10 text-center">
           Our Team
         </h2>
         <div className="grid md:grid-cols-3 grid-cols-2 gap-4 gap-y-8">
@@ -130,7 +130,7 @@ export default function AboutUs() {
       </section>
       <section id="story" className="team text-center md:px-10 px-6">
         <div className="w-full py-20 flex flex-col items-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-10 text-center">
+          <h2 className="text-3xl md:text-3xl font-bold text-gray-800 mb-10 text-center">
             Our Story
           </h2>
           <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">

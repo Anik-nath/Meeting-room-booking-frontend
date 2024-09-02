@@ -4,7 +4,7 @@ export default function Services() {
   return (
     <div className="md:px-10 px-6 mx-auto py-10 md:py-24">
       <div className="text-center pb-12">
-        <h1 className="text-4xl text-primary font-bold md:text-6xl">
+        <h1 className="md:text-5xl text-3xl text-primary font-bold ">
           Our solutions
         </h1>
         <p className="text-gray-500 text-2xl mt-4">Comprehensive Services to Meet Your Every Need.</p>

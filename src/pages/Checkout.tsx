@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TCheckout } from "../Redux/Types/Types";

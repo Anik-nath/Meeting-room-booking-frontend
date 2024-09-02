@@ -37,7 +37,7 @@ export default function ContactUs() {
         </div>
       </section>
       <section id="contact" className="text-center md:px-10 px-6 py-12">
-        <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-10 text-center">
+        <h2 className="text-3xl md:text-3xl font-bold text-gray-800 mb-10 text-center">
           Let's start conversation
         </h2>
         {/* contact form*/}

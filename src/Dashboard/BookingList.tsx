@@ -13,6 +13,7 @@ export default function BookingList() {
   // console.log(allBookings);
   const [updateBooking] = useBookingStatusMutation();
   const [deleteBooking] = useDeleteBookingMutation();
+  // accept booking
   const handleAcceptBooking = async (id: string) => {
     try {
       await updateBooking({ id, isConfirmed: "confirmed" }).unwrap();
@@ -23,6 +24,7 @@ export default function BookingList() {
       toast.error("Failed to accept booking.");
     }
   };
+  // cancel by admin booking
   const handleRejectBooking = async (id: string) => {
     try {
       await updateBooking({ id, isConfirmed: "unconfirmed" }).unwrap();
@@ -32,6 +34,7 @@ export default function BookingList() {
       toast.error("Failed to Unconfirmed booking.");
     }
   };
+  // delete booking
   const handleDeleteBooking = async (id: string) => {
     try {
       await deleteBooking({ id, isDeleted: true }).unwrap();

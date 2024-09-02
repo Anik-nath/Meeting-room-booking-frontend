@@ -128,3 +128,32 @@ export type TConfirmModal = {
   onClose: (confirm: boolean) => void;
   onConfirm: (confirm: boolean) => void;
 };
+
+export type TReview = {
+  _id: string;
+  reviewerName: string;
+  reviewerBio: string;
+  review: string;
+  companyName: string;
+};
+export type TReviewResponse = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: TReview[];
+};
+export type TSignUp = {
+  _id: string;
+  name: string;
+  password: string;
+  email: string;
+  phone: string;
+  role: string;
+  address: string;
+};
+export type TSignUpResponse = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: TSignUp[];
+};

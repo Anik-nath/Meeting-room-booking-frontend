@@ -1,4 +1,4 @@
-import { CalendarCheck, CalendarClock, CalendarHeart } from "lucide-react";
+import { Banknote, CalendarCheck, CalendarClock, CalendarHeart } from "lucide-react";
 
 export default function HowItWorks() {
   return (
@@ -25,7 +25,7 @@ export default function HowItWorks() {
               />
             </div>
 
-            <div className="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12">
+            <div className="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-4 gap-x-12">
             <div
                 id="step-1"
                 className="flex flex-col items-center justify-center"
@@ -63,6 +63,19 @@ export default function HowItWorks() {
                 </div>
                 <p className="mt-10 font-semibold text-gray-500 fonsem md:text-lg">
                   Confirm Booking
+                </p>
+              </div>
+              <div
+                id="step-4"
+                className="flex flex-col items-center justify-center"
+              >
+                <div className="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
+                <span className="w-full flex flex-row justify-center items-center">
+                  <Banknote className="h-12 w-full text-2xl text-primary" />
+                </span>
+                </div>
+                <p className="mt-10 font-semibold text-gray-500 fonsem md:text-lg">
+                  Payment 
                 </p>
               </div>
             </div>

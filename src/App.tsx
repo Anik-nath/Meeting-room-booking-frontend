@@ -29,6 +29,7 @@ import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import TermsOfUse from "./pages/TermsOfUse";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CookiePolicy from "./pages/CookiePolicy";
+import Reviews from "./pages/Reviews";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -74,6 +75,7 @@ function App() {
             ></Route>
           </Route>
         </Route>
+        <Route path="/reviews" element={<Reviews />}></Route>
         <Route path="/Terms-of-use" element={<TermsOfUse />}></Route>
         <Route path="/privacy-policiy" element={<PrivacyPolicy />}></Route>
         <Route path="/cookie-policiy" element={<CookiePolicy />}></Route>

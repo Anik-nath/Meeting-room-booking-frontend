@@ -11,8 +11,8 @@ export default function Whyus() {
         />
       </div>
       <div className="w-full flex flex-col justify-center text-secondary">
-        <h1 className="text-5xl font-bold py-4 text-white">Why choose us?</h1>
-        <p className="text-lg text-gray-100">
+        <h1 className="md:text-5xl text-3xl font-bold py-4 text-white md:text-start text-center">Why choose us?</h1>
+        <p className="text-lg text-gray-100 ">
           Discover the Ultimate Solution for Effortless Meeting Room
           Reservations And Featuring some advantages like -{" "}
         </p>

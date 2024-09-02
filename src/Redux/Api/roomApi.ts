@@ -5,6 +5,7 @@ import {
   TBookingResponse,
   TResponse,
   TResponseByID,
+  TReviewResponse,
   TRoom,
   TSlot,
   TSlotResponse,
@@ -23,7 +24,7 @@ export const roomApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    // get data
+    //--------- get data--------------//
     getRooms: builder.query<TResponse, void>({
       query: () => "rooms",
     }),
@@ -46,7 +47,10 @@ export const roomApi = createApi({
     getMyBooking: builder.query<TBookingResponse, string>({
       query: (email) => `my-bookings?${email}`,
     }),
-    // post data
+    getAllReviews: builder.query<TReviewResponse, void>({
+      query: () => "reviews",
+    }),
+    // --------post data------------//
     createRoom: builder.mutation({
       query: (newRoom) => ({
         url: "rooms",
@@ -68,7 +72,14 @@ export const roomApi = createApi({
         body: newBooking,
       }),
     }),
-    // update booking
+    createReviews: builder.mutation({
+      query: (newReviews) => ({
+        url: "reviews",
+        method: "POST",
+        body: newReviews,
+      }),
+    }),
+    // ----------------update -------------------
     bookingStatus: builder.mutation({
       query: ({ id, isConfirmed }) => ({
         url: `/bookings/${id}`,
@@ -98,7 +109,7 @@ export const roomApi = createApi({
         body: payload,
       }),
     }),
-    // delete
+    //------------------ delete----------------
     deleteBooking: builder.mutation({
       query: ({ id, isDeleted }) => ({
         url: `/bookings/${id}`,
@@ -133,10 +144,12 @@ export const {
   useCreateRoomMutation,
   useGetAvailAbleslotsQuery,
   useCreateBookingMutation,
+  useCreateReviewsMutation,
   useBookingStatusMutation,
   useDeleteBookingMutation,
   useDeleteRoomsMutation,
   useDeleteSlotsMutation,
   useRoomUpdateMutation,
   useSlotUpdateMutation,
+  useGetAllReviewsQuery,
 } = roomApi;

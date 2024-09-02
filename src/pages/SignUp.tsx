@@ -1,6 +1,32 @@
 import { Check } from "lucide-react";
+import { toast } from "react-toastify";
+import { DisplayErrorMessage } from "../Redux/utils/errorMessage";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { TSignUp } from "../Redux/Types/Types";
+import { useSignUpMutation } from "../Redux/Api/authApi";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+  const { register, reset, handleSubmit } = useForm<TSignUp>();
+  const [CreateUser] = useSignUpMutation();
+
+  const onSubmit: SubmitHandler<TSignUp> = async (formData) => {
+    const resultData = {
+      ...formData,
+      role: "user",
+    };
+    try {
+      await CreateUser(resultData).unwrap();
+      reset();
+      toast.success("Sign up successfully!");
+      navigate("/signin");
+    } catch (error) {
+      console.log(error);
+      const errorMessage = DisplayErrorMessage(error);
+      toast.error(errorMessage || "Failed to add Sign up.");
+    }
+  };
   return (
     <div className="md:px-10 px-6 py-24 bg-primary">
       <div className="bg-primary rounded-md md:w-3/4 w-full mx-auto shadow-2xl border">
@@ -17,13 +43,17 @@ export default function SignUp() {
             </div>
           </div>
           <div className="w-full bg-white">
-            <form className="px-10 md:py-20 py-10 w-full mx-auto">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="px-10 md:py-20 py-10 w-full mx-auto"
+            >
               {/* name */}
               <div className="text-left w-full text-primary mb-2 font-semibold">
                 <label htmlFor="name">Enter Name</label>
               </div>
               <input
                 type="text"
+                {...register("name")}
                 name="name"
                 placeholder="Write here"
                 className="input input-bordered input-primary w-full"
@@ -34,6 +64,7 @@ export default function SignUp() {
               </div>
               <input
                 type="email"
+                {...register("email")}
                 name="email"
                 placeholder="Write here"
                 className="input input-bordered input-primary w-full"
@@ -44,6 +75,7 @@ export default function SignUp() {
               </div>
               <input
                 type="password"
+                {...register("password")}
                 name="password"
                 placeholder="Write here "
                 className="input input-bordered input-primary w-full"
@@ -54,6 +86,7 @@ export default function SignUp() {
               </div>
               <input
                 type="tel"
+                {...register("phone")}
                 name="phone"
                 placeholder="Write here "
                 className="input input-bordered input-primary w-full"
@@ -64,6 +97,7 @@ export default function SignUp() {
               </div>
               <input
                 type="text"
+                {...register("address")}
                 name="address"
                 placeholder="Write here "
                 className="input input-bordered input-primary w-full"
