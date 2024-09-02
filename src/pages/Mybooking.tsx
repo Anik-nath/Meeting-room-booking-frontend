@@ -1,4 +1,3 @@
-import UpdateBookingModal from "../Components/Modal/UpdateBookingModal";
 import { useGetMyBookingQuery } from "../Redux/Api/roomApi";
 import { useAppSelector } from "../Redux/hook";
 
@@ -7,14 +6,7 @@ export default function Mybooking() {
   const { data: bookings } = useGetMyBookingQuery(user?.email ?? "");
   const mybookings = bookings?.data;
   // console.log(mybookings)
-  const handleModal = () => {
-    const modal = document.getElementById(
-      "Update-booking-modal"
-    ) as HTMLDialogElement;
-    if (modal) {
-      modal.showModal();
-    }
-  };
+
   return (
     <div className="md:px-10 px-6 py-12 bg-primary min-h-screen">
       <div className="flex justify-between">
@@ -41,7 +33,7 @@ export default function Mybooking() {
             <tbody>
               {mybookings?.map((booking) => (
                 <tr key={booking._id} className="border-gray-300 text-gray-700">
-                  <td>#{booking._id.slice(0, 4)}</td>
+                  <td>{booking.transactionId}</td>
                   <td>{booking.date}</td>
                   <td>{user?.name}</td>
                   <td>{booking.room.roomNo}</td>
@@ -59,7 +51,7 @@ export default function Mybooking() {
                     ))}
                   </td>
                   <td>${booking.totalAmount}</td>
-                  <th>
+                  <td className="capitalize">
                     <div
                       className={`badge ${
                         booking.isConfirmed === "confirmed"
@@ -69,16 +61,17 @@ export default function Mybooking() {
                     >
                       {booking.isConfirmed}
                     </div>
-                  </th>
-                  <td>
-                    <button
-                      id="update-booking"
-                      className="btn-secondary"
-                      onClick={handleModal}
-                    >
-                      Update
-                    </button>
-                    <UpdateBookingModal />
+                  </td>
+                  <td className="font-semibold">
+                    {booking.isPayment === true ? (
+                      <span className=" badge badge-primary text-white rounded-full px-2">
+                        Paid
+                      </span>
+                    ) : (
+                      <span className=" badge badge-error text-white rounded-full px-2">
+                        Unpaid
+                      </span>
+                    )}
                   </td>
                 </tr>
               ))}

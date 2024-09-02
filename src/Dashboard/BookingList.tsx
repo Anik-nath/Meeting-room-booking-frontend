@@ -42,7 +42,6 @@ export default function BookingList() {
     }
   };
 
-  
   return (
     <div className="bg-gray-100 p-4 rounded-xl">
       <h1 className="text-2xl">Booking List</h1>
@@ -52,27 +51,29 @@ export default function BookingList() {
           <table className="table">
             <thead>
               <tr className="border-primary">
+                <th>Trans. Id</th>
                 <th>Booking Date</th>
-                <th>Booking By</th>
-                <th>Room No.</th>
-                <th>Room Name</th>
-                <th>Floor No.</th>
-                <th>Meeting Time</th>
+                <th>Room Details</th>
+                <th>Time Slot</th>
                 <th>Amount</th>
                 <th>Booking Status</th>
+                <th>Payment</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {allBookings?.map((booking) => (
                 <tr key={booking._id} className="border-gray-300 text-gray-700">
-                  <td>{booking?.date}</td>
-                  <td>{booking?.user?.name}</td>
-                  <td>{booking.room?.roomNo}</td>
+                  <td>{booking.transactionId}</td>
                   <td>
-                    <div className="font-semibold">{booking?.room?.name}</div>
+                    <p>{booking?.user?.name}</p>
+                    <p>{booking?.date}</p>
                   </td>
-                  <td>{booking?.room?.floorNo}</td>
+                  <td>
+                    <p>Room No: {booking.room?.roomNo}</p>
+                    <p>Name: {booking?.room?.name}</p>
+                    <p>Floor No: {booking?.room?.floorNo}</p>
+                  </td>
                   <td>
                     {booking.slots.map((slot) => (
                       <div key={slot._id} className="py-1">
@@ -95,6 +96,17 @@ export default function BookingList() {
                     >
                       {booking.isConfirmed}
                     </div>
+                  </td>
+                  <td className="font-semibold">
+                    {booking.isPayment === true ? (
+                      <span className=" badge badge-primary text-white rounded-full px-2">
+                        Paid
+                      </span>
+                    ) : (
+                      <span className=" badge badge-error text-white rounded-full px-2">
+                        Unpaid
+                      </span>
+                    )}
                   </td>
                   <td className="flex flex-col items-center justify-center gap-2">
                     <button

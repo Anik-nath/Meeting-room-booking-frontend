@@ -45,7 +45,7 @@ export type TRoom = {
   capacity: number;
   pricePerSlot: number;
   amenities: string[];
-  isDeleted:boolean;
+  isDeleted: boolean;
 };
 
 export type TSlotResponse = {
@@ -78,6 +78,8 @@ export type TBooking = {
   totalAmount: number;
   isConfirmed: string;
   isDeleted: boolean;
+  isPayment: boolean;
+  transactionId: string;
 };
 
 export type TBookingResponse = {
@@ -118,6 +120,7 @@ export type TCheckout = {
   user: string;
   room: string;
   slots: string[];
+  totalCost: number;
 };
 
 export type TConfirmModal = {

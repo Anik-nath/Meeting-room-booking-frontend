@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TCheckout } from "../Redux/Types/Types";
 import { useCreateBookingMutation } from "../Redux/Api/roomApi";
 import { toast } from "react-toastify";
 import { DisplayErrorMessage } from "../Redux/utils/errorMessage";
-import { useState } from "react";
 import BookingConfirmModal from "../Components/Modal/BookingConfirmModal";
 
 export default function Checkout() {
@@ -13,19 +13,16 @@ export default function Checkout() {
   const location = useLocation();
   const { date, user, totalCost, roomID, room, slotId, slots } =
     location.state || {};
-  // console.log(slotId);
   const { register, handleSubmit, reset } = useForm<TCheckout>({
-    defaultValues: {
-      slots: slotId,
-    },
+    defaultValues: { slots: slotId },
   });
 
-  // console.log(slots);
-  const [createRoom] = useCreateBookingMutation();
+  const [createBooking] = useCreateBookingMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formDataToSubmit, setFormDataToSubmit] = useState<TCheckout | null>(
     null
   );
+  const [loading, setLoading] = useState(false);
 
   const onSubmit: SubmitHandler<TCheckout> = (formData) => {
     setFormDataToSubmit(formData);
@@ -35,23 +32,30 @@ export default function Checkout() {
   const handleConfirm = async (confirm: boolean) => {
     setIsModalOpen(false);
     if (confirm && formDataToSubmit) {
+      setLoading(true);
       try {
         const finalData = {
           ...formDataToSubmit,
           slots: formDataToSubmit.slots || [],
         };
-        console.log(finalData);
-        await createRoom(finalData).unwrap();
-        reset();
-        toast.success("Booking successfully!");
-        navigate("/mybookings");
+        const response = await createBooking(finalData).unwrap();
+        const paymentUrl = response.data.paymentResponse.payment_url;
+        window.location.href = paymentUrl;
+
+        if (response.data.result.isPayment === true) {
+          reset();
+          toast.success("Booking successful!");
+          navigate("/mybookings");
+        }
       } catch (error) {
-        console.log(error);
         const errorMessage = DisplayErrorMessage(error);
         toast.error(errorMessage || "Failed to book.");
+      } finally {
+        setLoading(false);
       }
     }
   };
+
   return (
     <div className="bg-primary dark:bg-gray-900">
       <div id="checkout-card-wrapper" className="w-full max-w-3xl mx-auto p-8">
@@ -63,7 +67,6 @@ export default function Checkout() {
           <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
             Checkout
           </h1>
-          {/* summary */}
           <div id="summary" className="mb-2 border-b pb-6">
             <h2 className="text-xl font-semibold text-gray-700 dark:text-white mb-2">
               Booking Summary
@@ -84,7 +87,6 @@ export default function Checkout() {
                   className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
                   readOnly
                 />
-                {/* hidden */}
                 <input
                   id="user"
                   type="hidden"
@@ -167,7 +169,6 @@ export default function Checkout() {
               </div>
             </div>
           </div>
-          {/* Total Cost */}
           <div
             id="total-cost"
             className="flex flex-row justify-between items-center border-b mb-6"
@@ -180,58 +181,13 @@ export default function Checkout() {
             </h2>
             <p className="font-bold text-lg">${totalCost}</p>
           </div>
-          {/* Payment Information */}
-          <div id="payment-info">
-            <h2 className="text-xl font-semibold text-gray-700 dark:text-white mb-2 mt-4">
-              Payment Information
-            </h2>
-            <div className="mt-4">
-              <label
-                htmlFor="card_number"
-                className="block text-gray-700 dark:text-white mb-1"
-              >
-                Card Number
-              </label>
-              <input
-                type="text"
-                id="card_number"
-                className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 mt-4">
-              <div>
-                <label
-                  htmlFor="exp_date"
-                  className="block text-gray-700 dark:text-white mb-1"
-                >
-                  Expiration Date
-                </label>
-                <input
-                  type="text"
-                  id="exp_date"
-                  className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="cvv"
-                  className="block text-gray-700 dark:text-white mb-1"
-                >
-                  CVV
-                </label>
-                <input
-                  type="text"
-                  id="cvv"
-                  className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
-                />
-              </div>
-            </div>
-          </div>
-          {/* confirm button */}
           <div id="confirm-button" className="mt-8 flex justify-end">
-            <button type="submit" className="btn btn-primary text-white">
-              Confirm Booking
+            <button
+              type="submit"
+              className="btn btn-primary text-white"
+              disabled={loading}
+            >
+              {loading ? "Processing..." : "Payment"}
             </button>
           </div>
         </form>
