@@ -8,6 +8,7 @@ export default function Footer() {
     "/dashboard/create-slot",
     "/dashboard/slot-list",
     "/dashboard/booking-list",
+    "/dashboard/user-list",
   ];
   const isFooterVisible = !hideFooterRoutes.includes(location.pathname);
   return (

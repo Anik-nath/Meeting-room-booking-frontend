@@ -13,6 +13,7 @@ export default function Navbar() {
     "/dashboard/create-slot",
     "/dashboard/slot-list",
     "/dashboard/booking-list",
+    "/dashboard/user-list",
   ];
   const isNavbarVisible = !hideNavbarRoutes.includes(location.pathname);
 
