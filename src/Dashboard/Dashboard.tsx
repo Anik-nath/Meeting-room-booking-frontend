@@ -11,6 +11,7 @@ import {
   LogOut,
   Logs,
   SquarePen,
+  Users2,
 } from "lucide-react";
 import { useState } from "react";
 import icon from "../assets/icon.png";
@@ -19,7 +20,7 @@ import { useAppDispatch } from "../Redux/hook";
 import { clearUser } from "../Redux/FeatureSlice/userSlice";
 import { toast } from "react-toastify";
 
-type TMenu = "menu1" | "menu2" | "menu3" | null;
+type TMenu = "menu1" | "menu2" | "menu3" | "menu4" | null;
 
 const Dashboard: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -199,9 +200,37 @@ const Dashboard: React.FC = () => {
                     </li>
                   </ul>
                 </li>
+                <li id="manage-users ">
+                  <button
+                    className="w-full flex flex-row items-center text-left p-4 hover:bg-gray-100 hover:text-primary bg-primary text-white focus:outline-none"
+                    onClick={() => toggleSubmenu("menu4")}
+                  >
+                    <Users2 className="w-6 h-6 mr-1" />
+                    Manage Users
+                  </button>
+                  <ul
+                    id="menu4"
+                    className={`pl-8 space-y-2 ${
+                      openMenu === "menu4" ? "block" : "hidden"
+                    }`}
+                  >
+                    <li>
+                      <a
+                        href="/dashboard/user-list"
+                        className="block p-2 hover:bg-primary hover:text-white bg-gray-100 text-primary mt-2"
+                      >
+                        <span className="flex flex-row items-center gap-1">
+                          <List />
+                          User List
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                
               </ul>
             </div>
-            <div id="manage-Booking">
+            <div id="back-home">
               <a
                 href="/home"
                 className="w-full flex flex-row items-center text-left p-4 hover:bg-gray-100 hover:text-primary border border-primary text-primary focus:outline-none"

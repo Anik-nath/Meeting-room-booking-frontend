@@ -62,20 +62,19 @@ export default function Navbar() {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
                 <li className="py-1 border-b font-semibold flex flex-row items-center">
-                  <Home className="text-primary h-12 w-12"/>
+                  <Home className="text-primary h-12 w-12" />
                   <a href="/home">Home</a>
                 </li>
                 <li className="py-1 border-b font-semibold flex flex-row items-center">
-                  <Warehouse className="text-primary h-12 w-12"/>
+                  <Warehouse className="text-primary h-12 w-12" />
                   <a href="/rooms">Meeting Rooms</a>
                 </li>
                 <li className="py-1 border-b font-semibold flex flex-row items-center">
-                  
-                  <Users className="text-primary h-12 w-12"/>
+                  <Users className="text-primary h-12 w-12" />
                   <a href="/about-us">About Us</a>
                 </li>
                 <li className="py-1 border-b font-semibold flex flex-row items-center">
-                  <Phone className="text-primary h-12 w-12"/>
+                  <Phone className="text-primary h-12 w-12" />
                   <a href="/contact-us">Contact Us</a>
                 </li>
               </ul>

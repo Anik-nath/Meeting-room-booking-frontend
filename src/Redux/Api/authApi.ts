@@ -1,5 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { TSignInRequest, TSignInResponse } from "../Types/Types";
+import {
+  TSignInRequest,
+  TSignInResponse,
+  TUserResponse,
+} from "../Types/Types";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -21,7 +25,22 @@ export const authApi = createApi({
         body: newUser,
       }),
     }),
+    getAllUsers: builder.query<TUserResponse, void>({
+      query: () => "users",
+    }),
+    userRole: builder.mutation({
+      query: ({ id, role }) => ({
+        url: `/users/${id}`,
+        method: "PUT",
+        body: { role },
+      }),
+    }),
   }),
 });
 
-export const { useSignInMutation, useSignUpMutation } = authApi;
+export const {
+  useSignInMutation,
+  useSignUpMutation,
+  useGetAllUsersQuery,
+  useUserRoleMutation,
+} = authApi;

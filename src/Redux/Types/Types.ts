@@ -1,3 +1,9 @@
+export type TUserResponse = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: TuserData[];
+};
 export type TuserData = {
   _id: string;
   name: string;

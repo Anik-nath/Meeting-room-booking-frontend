@@ -30,6 +30,7 @@ import TermsOfUse from "./pages/TermsOfUse";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CookiePolicy from "./pages/CookiePolicy";
 import Reviews from "./pages/Reviews";
+import UserList from "./Dashboard/UserList";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -73,6 +74,7 @@ function App() {
               path="booking-list"
               element={<BookingList></BookingList>}
             ></Route>
+            <Route path="user-list" element={<UserList></UserList>}></Route>
           </Route>
         </Route>
         <Route path="/reviews" element={<Reviews />}></Route>
