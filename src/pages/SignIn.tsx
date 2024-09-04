@@ -31,7 +31,7 @@ export default function SignIn() {
 
   return (
     <div className="md:px-10 px-6 py-24 bg-primary">
-      <div className="bg-primary rounded-md md:w-3/4 w-full mx-auto shadow-2xl border">
+      <div className="bg-primary rounded-md md:w-3/4 w-full mx-auto shadow-2xl border nexus-animate-2">
         <div className="flex justify-center md:flex-row flex-col">
           <div className="w-full md:w-1/2 md:py-20 py-4 min-h-full flex flex-col items-center md:justify-between justify-center">
             <div className="text-center">

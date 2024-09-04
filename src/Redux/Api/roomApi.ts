@@ -14,7 +14,7 @@ import {
 export const roomApi = createApi({
   reducerPath: "roomsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api/",
+    baseUrl: "https://assignment-3-two-tawny.vercel.app/api/",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("Authorization");
       if (token) {
@@ -82,7 +82,7 @@ export const roomApi = createApi({
     // ----------------update -------------------
     bookingStatus: builder.mutation({
       query: ({ id, isConfirmed }) => ({
-        url: `/bookings/${id}`,
+        url: `bookings/${id}`,
         method: "PUT",
         body: { isConfirmed },
       }),
@@ -112,21 +112,21 @@ export const roomApi = createApi({
     //------------------ delete----------------
     deleteBooking: builder.mutation({
       query: ({ id, isDeleted }) => ({
-        url: `/bookings/${id}`,
+        url: `bookings/${id}`,
         method: "Delete",
         body: { isDeleted },
       }),
     }),
     deleteRooms: builder.mutation({
       query: ({ id, isDeleted }) => ({
-        url: `/rooms/${id}`,
+        url: `rooms/${id}`,
         method: "Delete",
         body: { isDeleted },
       }),
     }),
     deleteSlots: builder.mutation({
       query: ({ id, isDeleted }) => ({
-        url: `/slots/${id}`,
+        url: `slots/${id}`,
         method: "Delete",
         body: { isDeleted },
       }),

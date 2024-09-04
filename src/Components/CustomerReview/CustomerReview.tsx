@@ -13,7 +13,7 @@ export default function CustomerReview() {
 
   return (
     <div className="bg-primary md:px-10 px-6 py-10 sm:py-16 lg:py-24 grid md:grid-cols-3 grid-cols-1 md:gap-4 gap-8">
-      <div className="w-full h-full flex flex-col justify-center">
+      <div className="w-full h-full flex flex-col justify-center nexus-animate-1">
         <h1 className="md:text-5xl text-3xl font-bold py-4 text-white">What People Say</h1>
         <p className=" text-gray-100 mb-4 md:text-lg text-md">
           Join countless satisfied users who have transformed their meeting

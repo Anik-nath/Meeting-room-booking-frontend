@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 export default function UserList() {
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
 
-  const { data: users, refetch } = useGetAllUsersQuery();
+  const { data: users, refetch, isLoading } = useGetAllUsersQuery();
   const [roleChange] = useUserRoleMutation();
 
   const handleRoleChange = async () => {
@@ -32,8 +32,15 @@ export default function UserList() {
 
   return (
     <div className="bg-gray-100 p-4 rounded-xl">
-      <h1 className="text-2xl">Booking List</h1>
+      <h1 className="text-2xl">Users List</h1>
       <div>
+        {
+          isLoading ? 
+            <div className=" text-primary flex justify-center items-center w-full h-screen">
+              <span className="loading loading-bars loading-lg"></span>
+            </div>
+          :
+      
         <div className="overflow-x-auto bg-white mt-8 rounded-xl">
           <table className="table">
             <thead>
@@ -46,33 +53,34 @@ export default function UserList() {
                 <th>Role</th>
               </tr>
             </thead>
-            <tbody>
-              {users?.data?.map((user) => (
-                <tr key={user._id} className="border-gray-300 text-gray-700">
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.phone}</td>
-                  <td>{user.role}</td>
-                  <td>{user.address}</td>
-                  <td className="flex flex-col items-center justify-center gap-2">
-                    <button
-                      className={`${
-                        user.role === "user"
-                          ? "border-error text-error"
-                          : "border-primary text-primary"
-                      } border btn-sm rounded`}
-                      onClick={() => openModal(user._id)}
-                    >
-                      <span>
-                        {user.role === "admin" ? "Make User" : "Make Admin"}
-                      </span>
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+
+              <tbody>
+                {users?.data?.map((user) => (
+                  <tr key={user._id} className="border-gray-300 text-gray-700">
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.phone}</td>
+                    <td>{user.role}</td>
+                    <td>{user.address}</td>
+                    <td className="flex flex-col items-center justify-center gap-2">
+                      <button
+                        className={`${
+                          user.role === "user"
+                            ? "border-error text-error"
+                            : "border-primary text-primary"
+                        } border btn-sm rounded`}
+                        onClick={() => openModal(user._id)}
+                      >
+                        <span>
+                          {user.role === "admin" ? "Make User" : "Make Admin"}
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
           </table>
-        </div>
+        </div>  }
       </div>
 
       {selectedUserId && (

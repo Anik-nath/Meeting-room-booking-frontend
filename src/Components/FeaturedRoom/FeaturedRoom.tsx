@@ -8,11 +8,11 @@ export default function FeaturedRoom() {
   return (
     <div
       id="HowItWorks"
-      className="relative py-10 sm:py-16 lg:py-24 bg-gray-100"
+      className="relative py-10 sm:py-16 lg:py-24 bg-gray-100 "
     >
-      <div className="md:px-10 px-6 mx-auto">
+      <div className="md:px-10 px-6 mx-auto ">
         {/* section header */}
-        <div className="max-w-2xl mx-auto text-center">
+        <div className="max-w-2xl mx-auto text-center nexus-animate-1">
           <h2 className="text-4xl text-primary font-bold mx-auto md:text-6xl lg:text-5xl">
             Featured Rooms
           </h2>
@@ -24,7 +24,9 @@ export default function FeaturedRoom() {
         <div id="rooms" className="mt-12 lg:mt-20">
           <div className="grid md:grid-cols-4 lg:grid-cols-4 grid-cols-2 gap-4">
             {Allrooms?.map((room) => (
+             <div className="nexus-animate-1">
               <RoomCard key={room._id} room={room}></RoomCard>
+             </div>
             )).splice(0, 4)}
           </div>
           <div className="flex flex-row justify-center mt-12">

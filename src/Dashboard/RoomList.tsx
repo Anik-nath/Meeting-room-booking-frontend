@@ -11,9 +11,9 @@ import { useState } from "react";
 import { TRoom } from "../Redux/Types/Types";
 
 export default function RoomList() {
-  const { data, refetch } = useGetRoomsQuery();
+  const { data, refetch, isLoading } = useGetRoomsQuery();
   const Allrooms = data?.data.filter((item) => item.isDeleted === false);
-  
+
   const [deleteRooms] = useDeleteRoomsMutation();
   const handleDeleteRoom = async (id: string | undefined) => {
     try {
@@ -61,80 +61,86 @@ export default function RoomList() {
     <div className="bg-gray-100 p-4 rounded-xl">
       <h1 className="text-2xl font-semibold mb-6">Room List</h1>
       {/* Room list */}
-      <div className="overflow-x-auto bg-white mt-8 rounded-xl">
-        {Allrooms?.length === 0 ? (
-          <div className="text-center  text-primary text-xl flex flex-row items-center justify-center h-screen">
-            <h2>No rooms available.</h2>
-          </div>
-        ) : (
-          <table className="table w-full">
-            <thead>
-              <tr className="border-primary">
-                <th>Room Name</th>
-                <th>Room No.</th>
-                <th>Floor No.</th>
-                <th>Capacity</th>
-                <th>Price Per Slot</th>
-                <th>Amenities</th>
-                <th>Update</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Allrooms?.map((room) => (
-                <tr key={room._id} className="border-gray-300 text-gray-700">
-                  <td>
-                    <div>
-                      <div className="font-semibold">{room.name}</div>
-                    </div>
-                  </td>
-                  <td>#{room.roomNo}</td>
-                  <td>{room.floorNo}</td>
-                  <td>{room.capacity}</td>
-                  <td>${room.pricePerSlot}</td>
-                  <td>
-                    <ul>
-                      {room.amenities.map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                    </ul>
-                  </td>
-                  <td>
-                    <button
-                      data-tip="Click to Edit"
-                      onClick={() => handleEditRoom(room)}
-                      className="bg-primary tooltip tooltip-primary text-white btn-sm rounded"
-                    >
-                      <Pencil className="h-5 w-5" />
-                    </button>
-                    {/* modal for edit */}
-                    {selectedRoom && (
-                      <EditRoom
-                        isOpen={isModalOpen}
-                        onClose={() => {
-                          setIsModalOpen(false);
-                          setSelectedRoom(null);
-                        }}
-                        onSubmit={handleUpdateRoom}
-                        room={selectedRoom}
-                      />
-                    )}
-                  </td>
-                  <td>
-                    <button
-                      data-tip="Click to Remove"
-                      onClick={() => handleDeleteRoom(room._id)}
-                      className="bg-red-500 tooltip tooltip-error text-white btn-sm rounded"
-                    >
-                      <Trash2 className="h-5 w-5" />
-                    </button>
-                  </td>
+      {isLoading ? (
+        <div className=" text-primary flex justify-center items-center w-full h-screen">
+          <span className="loading loading-bars loading-lg"></span>
+        </div>
+      ) : (
+        <div className="overflow-x-auto bg-white mt-8 rounded-xl">
+          {Allrooms?.length === 0 ? (
+            <div className="text-center  text-primary text-xl flex flex-row items-center justify-center h-screen">
+              <h2>No rooms available.</h2>
+            </div>
+          ) : (
+            <table className="table w-full">
+              <thead>
+                <tr className="border-primary">
+                  <th>Room Name</th>
+                  <th>Room No.</th>
+                  <th>Floor No.</th>
+                  <th>Capacity</th>
+                  <th>Price Per Slot</th>
+                  <th>Amenities</th>
+                  <th>Update</th>
+                  <th>Delete</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
+              </thead>
+              <tbody>
+                {Allrooms?.map((room) => (
+                  <tr key={room._id} className="border-gray-300 text-gray-700">
+                    <td>
+                      <div>
+                        <div className="font-semibold">{room.name}</div>
+                      </div>
+                    </td>
+                    <td>#{room.roomNo}</td>
+                    <td>{room.floorNo}</td>
+                    <td>{room.capacity}</td>
+                    <td>${room.pricePerSlot}</td>
+                    <td>
+                      <ul>
+                        {room.amenities.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                    </td>
+                    <td>
+                      <button
+                        data-tip="Click to Edit"
+                        onClick={() => handleEditRoom(room)}
+                        className="bg-primary tooltip tooltip-primary text-white btn-sm rounded"
+                      >
+                        <Pencil className="h-5 w-5" />
+                      </button>
+                      {/* modal for edit */}
+                      {selectedRoom && (
+                        <EditRoom
+                          isOpen={isModalOpen}
+                          onClose={() => {
+                            setIsModalOpen(false);
+                            setSelectedRoom(null);
+                          }}
+                          onSubmit={handleUpdateRoom}
+                          room={selectedRoom}
+                        />
+                      )}
+                    </td>
+                    <td>
+                      <button
+                        data-tip="Click to Remove"
+                        onClick={() => handleDeleteRoom(room._id)}
+                        className="bg-red-500 tooltip tooltip-error text-white btn-sm rounded"
+                      >
+                        <Trash2 className="h-5 w-5" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      )}
     </div>
   );
 }

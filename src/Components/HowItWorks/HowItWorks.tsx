@@ -3,9 +3,9 @@ import { Banknote, CalendarCheck, CalendarClock, CalendarHeart } from "lucide-re
 export default function HowItWorks() {
   return (
     <>
-      <div id="HowItWorks" className="relative py-10 sm:py-16 lg:py-24">
+      <div id="HowItWorks" className="relative sm:py-16 py-24">
         <div className="md:px-6 px-6 mx-auto">
-          <div className="max-w-2xl mx-auto text-center">
+          <div className="max-w-2xl mx-auto text-center  nexus-animate-1">
             <h2 className="text-4xl text-primary font-bold mx-auto md:text-6xl lg:text-5xl">
               How does it work?
             </h2>
@@ -28,7 +28,7 @@ export default function HowItWorks() {
             <div className="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-4 gap-x-12">
             <div
                 id="step-1"
-                className="flex flex-col items-center justify-center"
+                className="flex flex-col items-center justify-center nexus-animate-1"
               >
                 <div className="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
                 <span className="w-full flex flex-row justify-center items-center">
@@ -41,7 +41,7 @@ export default function HowItWorks() {
               </div>
               <div
                 id="step-2"
-                className="flex flex-col items-center justify-center"
+                className="flex flex-col items-center justify-center nexus-animate-1"
               >
                 <div className="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
                 <span className="w-full flex flex-row justify-center items-center">
@@ -54,7 +54,7 @@ export default function HowItWorks() {
               </div>
               <div
                 id="step-3"
-                className="flex flex-col items-center justify-center"
+                className="flex flex-col items-center justify-center nexus-animate-1"
               >
                 <div className="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
                 <span className="w-full flex flex-row justify-center items-center">
@@ -67,7 +67,7 @@ export default function HowItWorks() {
               </div>
               <div
                 id="step-4"
-                className="flex flex-col items-center justify-center"
+                className="flex flex-col items-center justify-center nexus-animate-1"
               >
                 <div className="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
                 <span className="w-full flex flex-row justify-center items-center">

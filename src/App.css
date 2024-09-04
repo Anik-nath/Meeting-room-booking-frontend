@@ -23,3 +23,38 @@ body::-webkit-scrollbar {
 .scroll-to-top {
   bottom: 80px !important;
 }
+
+/* for scroll */
+@keyframes myanimation1 {
+  from {
+    opacity: 0.5;
+    clip-path: inset(100% 100% 0 0);
+    transform: translateY(-200px);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0px);
+  }
+}
+.nexus-animate-1 {
+  animation: myanimation1 1s linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 40%;
+}
+/* for on load */
+@keyframes myanimation2 {
+  from {
+    opacity: 0.5;
+    transform: translateY(100px);
+    clip-path: inset(100% 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+    clip-path: inset(0 0 0 0);
+  }
+}
+.nexus-animate-2 {
+  animation: myanimation2 2s ease;
+}

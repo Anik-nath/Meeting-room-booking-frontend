@@ -67,7 +67,7 @@ export default function AboutUs() {
       >
         <div className="absolute inset-0 bg-[#011100ee] opacity-75"></div>
 
-        <div className="relative text-center md:w-1/2 w-full">
+        <div className="relative text-center md:w-1/2 w-full nexus-animate-2">
           <h1 className="text-gray-200 md:text-2xl text-lg">About Us</h1>
           <h1 className="text-3xl md:text-5xl font-bold py-4 text-white">
             One Meeting at a Time
@@ -87,7 +87,7 @@ export default function AboutUs() {
       <section
         id="mission"
         ref={missionRef}
-        className="text-center md:px-10 px-6 py-12"
+        className="text-center md:px-10 px-6 py-24 nexus-animate-2"
       >
         <h2 className="text-3xl md:text-3xl font-bold text-gray-800 mb-10 text-center">
           Our Mission
@@ -113,7 +113,7 @@ export default function AboutUs() {
               id="teamMember"
               className="flex flex-col items-center "
             >
-              <div className="mask mask-hexagon-2 w-36 h-36">
+              <div className="mask mask-hexagon-2 w-36 h-36 nexus-animate-1">
                 <img className="w-full" src={member.image} />
               </div>
 
@@ -130,12 +130,12 @@ export default function AboutUs() {
       </section>
       <section id="story" className="team text-center md:px-10 px-6">
         <div className="w-full py-20 flex flex-col items-center">
-          <h2 className="text-3xl md:text-3xl font-bold text-gray-800 mb-10 text-center">
-            Our Story
+          <h2 className="nexus-animate-1 text-3xl md:text-3xl font-bold text-gray-800 mb-10 text-center">
+            Our Jounrney
           </h2>
-          <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
+          <ul className="nexus-animate-1 timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
             <li>
-              <div className="timeline-middle">
+              <div className="timeline-middle" >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -150,8 +150,8 @@ export default function AboutUs() {
                 </svg>
               </div>
               <div className="timeline-start mb-10 md:text-end">
-                <time className="font-mono italic">2021</time>
-                <div className="text-lg font-black">Platform Launched</div>
+                <time className="font-mono italic badge badge-primary text-white">2022</time>
+                <div className="text-lg text-primary font-semibold">Platform Launched</div>
                 In 2021, [Founders' Names] noticed the challenges professionals
                 faced in finding and booking spaces for meetings. They
                 envisioned a platform that would not only streamline the booking
@@ -176,8 +176,8 @@ export default function AboutUs() {
                 </svg>
               </div>
               <div className="timeline-end mb-10 md:text-start">
-                <time className="font-mono italic">2022</time>
-                <div className="text-lg font-black">Reached 10,000 Users</div>
+                <time className="font-mono italic badge badge-primary text-white">2023</time>
+                <div className="text-lg text-primary font-semibold">Reached 10,000 Users</div>
                 After months of hard work and dedication, our platform reached
                 10,000 users, proving the need for an easy and efficient meeting
                 room booking system in the co-working space industry.
@@ -201,8 +201,8 @@ export default function AboutUs() {
                 </svg>
               </div>
               <div className="timeline-start mb-10 md:text-end ">
-                <time className="font-mono italic">2023</time>
-                <div className="text-lg font-black">Expanded to 50+ Cities</div>
+                <time className="font-mono italic badge badge-primary text-white">2024</time>
+                <div className="text-lg text-primary font-semibold">Expanded to 50+ Cities</div>
                 Our platform expanded to over 50 cities, becoming a trusted name
                 in the co-working space industry, known for its user-friendly
                 design and robust management tools.

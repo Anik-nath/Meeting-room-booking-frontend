@@ -19,7 +19,7 @@ export default function ContactUs() {
       >
         <div className="absolute inset-0 bg-[#011100ee] opacity-75"></div>
 
-        <div className="relative text-center md:w-1/2 w-full">
+        <div className="relative text-center md:w-1/2 w-full nexus-animate-2">
           <h1 className="text-gray-200 md:text-2xl text-lg">Contact Us</h1>
           <h1 className="text-3xl md:text-5xl font-bold py-4 text-white">
             We're Here to Help

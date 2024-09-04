@@ -13,11 +13,11 @@ const MeetingRooms = () => {
     }
   };
 
-  const { data } = useGetRoomsQuery();
+  const { data, isLoading } = useGetRoomsQuery();
   const Allrooms = data?.data.filter((item) => item.isDeleted === false);
   const [searchTerm, setSearchTerm] = useState("");
   const [capacity, setCapacity] = useState<number | null>(null);
-  const [priceRange, setPriceRange] = useState<number>(1000);
+  const [priceRange, setPriceRange] = useState<number>(0);
   const [sortOrder, setSortOrder] = useState<"low-to-high" | "high-to-low">(
     "low-to-high"
   );
@@ -28,7 +28,7 @@ const MeetingRooms = () => {
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
     const matchesCapacity = capacity === null || room.capacity >= capacity;
-    const matchesPrice = room.pricePerSlot <= priceRange;
+    const matchesPrice = room.pricePerSlot >= priceRange;
     return matchesSearch && matchesCapacity && matchesPrice;
   }).sort((a, b) => {
     if (sortOrder === "low-to-high") {
@@ -73,7 +73,7 @@ const MeetingRooms = () => {
       >
         <div className="absolute inset-0 bg-[#011100ee] opacity-75"></div>
 
-        <div className="relative text-center md:w-1/2 w-full">
+        <div className="relative text-center md:w-1/2 w-full nexus-animate-2">
           <h1 className="text-gray-200 md:text-2xl text-lg">Meeting Rooms</h1>
           <h1 className="text-3xl md:text-5xl font-bold py-4 text-white">
             Discover the Perfect Space
@@ -199,18 +199,22 @@ const MeetingRooms = () => {
               className="col-span-3 mt-6 md:mt-0 lg:mt-0 px-6 md:px-0 lg:px-0"
             >
               {/* show all products start */}
-              {
+              {isLoading ? (
+                <div className=" text-white flex justify-center items-center h-screen ">
+                  <span className="loading loading-bars loading-lg"></span>
+                </div>
+              ) : (
                 <div className="grid lg:grid-cols-3 grid-cols-2 gap-4">
                   {filteredRooms?.map((room) => (
                     <RoomCard key={room._id} room={room}></RoomCard>
                   ))}
                 </div>
-              }
+              )}
               {/* show all products end*/}
               {filteredRooms?.length === 0 ? (
-                <p className="text-center text-xl text-white">
+                <div className="text-center text-xl flex justify-center items-center rounded-md border border-gray-100 h-screen text-white">
                   No rooms match your filters.
-                </p>
+                </div>
               ) : null}
             </div>
           </div>

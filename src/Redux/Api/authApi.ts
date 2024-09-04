@@ -1,14 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import {
-  TSignInRequest,
-  TSignInResponse,
-  TUserResponse,
-} from "../Types/Types";
+import { TSignInRequest, TSignInResponse, TUserResponse } from "../Types/Types";
 
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api/auth",
+    baseUrl: "https://assignment-3-two-tawny.vercel.app/api/auth",
   }),
   endpoints: (builder) => ({
     signIn: builder.mutation<TSignInResponse, TSignInRequest>({
@@ -20,13 +16,13 @@ export const authApi = createApi({
     }),
     SignUp: builder.mutation({
       query: (newUser) => ({
-        url: "signup",
+        url: "/signup",
         method: "POST",
         body: newUser,
       }),
     }),
     getAllUsers: builder.query<TUserResponse, void>({
-      query: () => "users",
+      query: () => "/users",
     }),
     userRole: builder.mutation({
       query: ({ id, role }) => ({

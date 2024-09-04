@@ -3,14 +3,14 @@ import { SquareArrowUpRight } from "lucide-react";
 export default function Whyus() {
   return (
     <div className="bg-primary md:px-10 px-6 py-10 sm:py-16 lg:py-24 flex md:flex-row lg:flex-row flex-col justify-between gap-12">
-      <div className="w-full flex justify-center items-center flex-col">
+      <div className="w-full flex justify-center items-center flex-col nexus-animate-1">
         <img
           className="w-full rounded-2xl"
           src="https://i.postimg.cc/tTBJmyfr/real-time-availabillity-image.webp"
           alt=""
         />
       </div>
-      <div className="w-full flex flex-col justify-center text-secondary">
+      <div className="w-full flex flex-col justify-center text-secondary nexus-animate-1">
         <h1 className="md:text-5xl text-3xl font-bold py-4 text-white md:text-start text-center">Why choose us?</h1>
         <p className="text-lg text-gray-100 ">
           Discover the Ultimate Solution for Effortless Meeting Room
