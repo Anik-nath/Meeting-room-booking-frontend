@@ -45,7 +45,7 @@ export default function Checkout() {
         if (response.data.result.isPayment === true) {
           reset();
           toast.success("Booking successful!");
-          navigate("/mybookings");
+          navigate("https://nexusmeet.netlify.app/mybookings");
         }
       } catch (error) {
         const errorMessage = DisplayErrorMessage(error);
