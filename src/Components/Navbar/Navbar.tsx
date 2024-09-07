@@ -162,9 +162,13 @@ export default function Navbar() {
                 ) : (
                   ""
                 )}
-                <li className="border-b py-2 hover:bg-gray-100 rounded-xl font-semibold">
-                  <a href="/dashboard">Dashboard</a>
-                </li>
+                {ResultuserData?.role === "admin" ? (
+                  <li className="border-b py-2 hover:bg-gray-100 rounded-xl font-semibold">
+                    <a href="/dashboard">Dashboard</a>
+                  </li>
+                ) : (
+                  ""
+                )}
                 <li className="border-b py-2 hover:bg-gray-100 rounded-xl font-semibold">
                   <a href="/mybookings">My Bookings</a>
                 </li>

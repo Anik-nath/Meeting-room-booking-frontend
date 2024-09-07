@@ -163,3 +163,10 @@ export type TSignUpResponse = {
   message: string;
   data: TSignUp[];
 };
+
+export type TContactFormValues = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};

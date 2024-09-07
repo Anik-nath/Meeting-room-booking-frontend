@@ -1,13 +1,41 @@
 import { useRef } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { TContactFormValues } from "../Redux/Types/Types";
+import { toast } from "react-toastify";
+import { DisplayErrorMessage } from "../Redux/utils/errorMessage";
+import { useCreateMailMutation } from "../Redux/Api/roomApi";
 
 export default function ContactUs() {
   const formRef = useRef<HTMLDivElement>(null);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<TContactFormValues>();
+  const [sendMail] = useCreateMailMutation();
 
   const scrollToSection = () => {
     if (formRef.current) {
       formRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  // Handle form submission
+  const onSubmit: SubmitHandler<TContactFormValues> = async (formData) => {
+    const resultData = {
+      ...formData,
+    };
+    try {
+      await sendMail(resultData).unwrap();
+      reset();
+      toast.success("Send mail successfully!");
+    } catch (error) {
+      const errorMessage = DisplayErrorMessage(error);
+      toast.error(errorMessage || "Failed to add review.");
+    }
+  };
+
   return (
     <div>
       <section
@@ -36,54 +64,80 @@ export default function ContactUs() {
           </button>
         </div>
       </section>
+
       <section id="contact" className="text-center md:px-10 px-6 py-12">
         <h2 className="text-3xl md:text-3xl font-bold text-gray-800 mb-10 text-center">
           Let's start conversation
         </h2>
-        {/* contact form*/}
+
+        {/* contact form */}
         <div ref={formRef}>
-          <form className="bg-gray-100 shadow-md rounded-2xl p-4 md:w-1/2 mx-auto">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="bg-gray-100 shadow-md rounded-2xl p-4 md:w-1/2 mx-auto"
+          >
             {/* name */}
             <div className="text-left w-full text-primary mb-2 font-semibold">
               <label htmlFor="name">Your Name</label>
             </div>
             <input
+              {...register("name", { required: "Name is required" })}
               type="text"
-              name="name"
               placeholder="Write here"
               className="input input-bordered input-primary w-full"
             />
+            {errors.name && (
+              <p className="text-red-500">{errors.name.message}</p>
+            )}
+
             {/* email */}
             <div className="text-left w-full text-primary my-2 font-semibold">
               <label htmlFor="email">Your Email</label>
             </div>
             <input
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Invalid email address",
+                },
+              })}
               type="email"
-              name="email"
               placeholder="Write here"
               className="input input-bordered input-primary w-full"
             />
+            {errors.email && (
+              <p className="text-red-500">{errors.email.message}</p>
+            )}
+
             {/* subject */}
             <div className="text-left w-full text-primary my-2 font-semibold">
               <label htmlFor="subject">Your Subject</label>
             </div>
             <input
+              {...register("subject", { required: "Subject is required" })}
               type="text"
-              name="subject"
               placeholder="Write here"
               className="input input-bordered input-primary w-full"
             />
+            {errors.subject && (
+              <p className="text-red-500">{errors.subject.message}</p>
+            )}
+
             {/* message */}
             <div className="text-left w-full text-primary my-2 font-semibold">
               <label htmlFor="message">Message</label>
             </div>
             <textarea
+              {...register("message", { required: "Message is required" })}
               rows={5}
               className="textarea textarea-bordered textarea-primary w-full p-2.5"
               placeholder="Write your thoughts here"
-              name="message"
-              id=""
-            ></textarea>
+            />
+            {errors.message && (
+              <p className="text-red-500">{errors.message.message}</p>
+            )}
+
             <div>
               <button type="submit" className="btn btn-primary text-white mt-2">
                 Submit

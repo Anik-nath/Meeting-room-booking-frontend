@@ -15,10 +15,11 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import icon from "../assets/icon.png";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../Redux/hook";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../Redux/hook";
 import { clearUser } from "../Redux/FeatureSlice/userSlice";
 import { toast } from "react-toastify";
+import { RootState } from "../Redux/store";
 
 type TMenu = "menu1" | "menu2" | "menu3" | "menu4" | null;
 
@@ -45,18 +46,19 @@ const Dashboard: React.FC = () => {
   const isActive = (path: string) => {
     return location.pathname === path ? "bg-gray-100" : "";
   };
-   //  logout user
-   const dispatch = useAppDispatch();
-   const navigate = useNavigate();
- 
-   const handleLogOut = () => {
-     dispatch(clearUser());
-     toast.success("You Just Logout!",{
-       position: "top-center",
-       autoClose: 2000,
-     });
-     navigate("/signin");
-   };
+  //  logout user
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    dispatch(clearUser());
+    toast.success("You Just Logout!", {
+      position: "top-center",
+      autoClose: 2000,
+    });
+    navigate("/signin");
+  };
+  const { userData } = useAppSelector((state: RootState) => state.user);
   return (
     <div className="flex h-screen">
       {/* <!-- Sidebar --> */}
@@ -227,7 +229,6 @@ const Dashboard: React.FC = () => {
                     </li>
                   </ul>
                 </li>
-                
               </ul>
             </div>
             <div id="back-home">
@@ -267,7 +268,10 @@ const Dashboard: React.FC = () => {
               <Bell className="text-gray-600"></Bell>
             </div>
             {/* <!-- Logout --> */}
-            <button onClick={handleLogOut} className="flex items-center bg-primary px-4 rounded-full py-1 text-white hover:bg-[#a3cf66]">
+            <button
+              onClick={handleLogOut}
+              className="flex items-center bg-primary px-4 rounded-full py-1 text-white hover:bg-[#a3cf66]"
+            >
               <LogOut className="w-5 h-5" />
               <span className="font-normal md:ml-2">Logout</span>
             </button>
@@ -276,7 +280,7 @@ const Dashboard: React.FC = () => {
 
         {/* <!-- Dashboard Content --> */}
         <div className="p-4">
-          <Outlet />
+          {userData?.role === "admin" ? <Outlet /> : <Navigate to="/signin" />}
         </div>
       </div>
     </div>

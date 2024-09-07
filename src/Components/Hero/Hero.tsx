@@ -12,7 +12,7 @@ export default function Hero() {
           Efficient, hassle-free room booking for all your meeting needs.
         </h3>
         <div>
-          <a className="btn-secondary btn" href="#">
+          <a className="btn-secondary btn" href="/rooms">
             <span>
               <CalendarPlus className="w-6 h-6" />
             </span>

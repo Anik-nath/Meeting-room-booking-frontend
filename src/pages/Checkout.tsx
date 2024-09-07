@@ -57,26 +57,21 @@ export default function Checkout() {
   };
 
   return (
-    <div className="bg-primary dark:bg-gray-900">
+    <div className="bg-primary ">
       <div id="checkout-card-wrapper" className="w-full max-w-3xl mx-auto p-8">
         <form
           onSubmit={handleSubmit(onSubmit)}
           id="checkout-card"
-          className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border dark:border-gray-700"
+          className="bg-white  p-8 rounded-lg shadow-md border "
         >
-          <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
-            Checkout
-          </h1>
+          <h1 className="text-2xl font-bold text-gray-800  mb-4">Checkout</h1>
           <div id="summary" className="mb-2 border-b pb-6">
-            <h2 className="text-xl font-semibold text-gray-700 dark:text-white mb-2">
+            <h2 className="text-xl font-semibold text-gray-700  mb-2">
               Booking Summary
             </h2>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-gray-700 dark:text-white mb-1"
-                >
+                <label htmlFor="name" className="block text-gray-700  mb-1">
                   Name
                 </label>
                 <input
@@ -84,7 +79,7 @@ export default function Checkout() {
                   id="name"
                   value={user?.name}
                   name="name"
-                  className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                  className="w-full rounded-lg border py-2 px-3"
                   readOnly
                 />
                 <input
@@ -95,10 +90,7 @@ export default function Checkout() {
                 />
               </div>
               <div>
-                <label
-                  htmlFor="room"
-                  className="block text-gray-700 dark:text-white mb-1"
-                >
+                <label htmlFor="room" className="block text-gray-700  mb-1">
                   Room
                 </label>
                 <input
@@ -106,24 +98,21 @@ export default function Checkout() {
                   id="room"
                   {...register("room", { required: true })}
                   value={roomID}
-                  className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                  className="w-full rounded-lg border py-2 px-3  "
                   readOnly
                 />
                 <input
                   type="text"
                   id="room"
                   value={room.name}
-                  className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                  className="w-full rounded-lg border py-2 px-3  "
                   readOnly
                 />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4 mt-4">
               <div>
-                <label
-                  htmlFor="date"
-                  className="block text-gray-700 dark:text-white mb-1"
-                >
+                <label htmlFor="date" className="block text-gray-700  mb-1">
                   Meeting Date
                 </label>
                 <input
@@ -131,15 +120,12 @@ export default function Checkout() {
                   {...register("date", { required: true })}
                   value={date}
                   id="date"
-                  className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                  className="w-full rounded-lg border py-2 px-3  "
                   readOnly
                 />
               </div>
               <div>
-                <label
-                  htmlFor="slots"
-                  className="block text-gray-700 dark:text-white mb-1"
-                >
+                <label htmlFor="slots" className="block text-gray-700  mb-1">
                   Slots
                 </label>
                 <div>
@@ -149,7 +135,7 @@ export default function Checkout() {
                       <div key={index} className="mb-4">
                         <label
                           htmlFor={`slots.${index}`}
-                          className="block text-gray-700 dark:text-white mb-1 border rounded-md "
+                          className="block text-gray-700  mb-1 border rounded-md "
                         >
                           {slotData?.startTime} - {slotData?.endTime}
                         </label>
@@ -159,7 +145,7 @@ export default function Checkout() {
                             required: true,
                           })}
                           value={slot}
-                          className="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none"
+                          className="w-full rounded-lg border py-2 px-3  "
                           readOnly
                         />
                       </div>
@@ -173,7 +159,7 @@ export default function Checkout() {
             id="total-cost"
             className="flex flex-row justify-between items-center border-b mb-6"
           >
-            <h2 className="text-xl font-semibold text-gray-700 dark:text-white mb-2">
+            <h2 className="text-xl font-semibold text-gray-700  mb-2">
               Total Cost{" "}
               <span className="text-sm font-normal text-gray-400">
                 Taxes and charges included

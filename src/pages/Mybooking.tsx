@@ -5,7 +5,7 @@ export default function Mybooking() {
   const user = useAppSelector((state) => state.user.userData);
   const { data: bookings, isLoading } = useGetMyBookingQuery(user?.email ?? "");
   const mybookings = bookings?.data;
-  // console.log(mybookings)
+  // console.log(mybookings);
 
   return (
     <div className="md:px-10 px-6 py-12 bg-primary min-h-screen">
@@ -13,9 +13,14 @@ export default function Mybooking() {
         <h1 className="text-white text-2xl">My Bookings</h1>
         <p className="text-white text-lg">Total : {mybookings?.length}</p>
       </div>
+
       {isLoading ? (
-        <div className=" text-white flex justify-center items-center w-full h-screen">
+        <div className=" text-white flex justify-center items-center w-full h-screen ">
           <span className="loading loading-bars loading-lg"></span>
+        </div>
+      ) : mybookings?.length === 0 ? (
+        <div className="text-center  text-white border rounded-md my-10 text-xl flex flex-row items-center justify-center h-screen">
+          <h2>No bookings yet!</h2>
         </div>
       ) : (
         <div>
@@ -72,11 +77,11 @@ export default function Mybooking() {
                     </td>
                     <td className="font-semibold">
                       {booking.isPayment === true ? (
-                        <span className=" badge badge-primary text-white rounded-full px-2">
+                        <span className="badge badge-primary text-white rounded-full px-2">
                           Paid
                         </span>
                       ) : (
-                        <span className=" badge badge-error text-white rounded-full px-2">
+                        <span className="badge badge-error text-white rounded-full px-2">
                           Unpaid
                         </span>
                       )}

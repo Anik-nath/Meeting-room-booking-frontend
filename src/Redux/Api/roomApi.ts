@@ -51,6 +51,7 @@ export const roomApi = createApi({
       query: () => "reviews",
     }),
     // --------post data------------//
+
     createRoom: builder.mutation({
       query: (newRoom) => ({
         url: "rooms",
@@ -77,6 +78,13 @@ export const roomApi = createApi({
         url: "reviews",
         method: "POST",
         body: newReviews,
+      }),
+    }),
+    createMail: builder.mutation({
+      query: (newMails) => ({
+        url: "contact",
+        method: "POST",
+        body: newMails,
       }),
     }),
     // ----------------update -------------------
@@ -152,4 +160,5 @@ export const {
   useRoomUpdateMutation,
   useSlotUpdateMutation,
   useGetAllReviewsQuery,
+  useCreateMailMutation,
 } = roomApi;

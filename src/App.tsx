@@ -43,6 +43,7 @@ function App() {
       dispatch(setUser({ token, userData: JSON.parse(userData) }));
     }
   }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Navbar></Navbar>
@@ -53,11 +54,12 @@ function App() {
         <Route path="/contact-us" element={<ContactUs />}></Route>
         <Route path="/signin" element={<SignIn />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
+
         <Route element={<PrivateRoute />}>
+          <Route path="/mybookings" element={<Mybooking />}></Route>
           <Route path="/rooms" element={<MeetingRooms />}></Route>
           <Route path="/rooms/:id" element={<RoomDetails />}></Route>
           <Route path="/checkout" element={<Checkout />}></Route>
-          <Route path="/mybookings" element={<Mybooking />}></Route>
           <Route path="/dashboard" element={<Dashboard></Dashboard>}>
             <Route index element={<DashboardHome></DashboardHome>}></Route>
             <Route
